@@ -4,21 +4,21 @@
   <meta charset="utf-8">
   
   
-  <title>post1 | Scarecrow</title>
+  <title>apue 摘要 | 🐎</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="post1">
+  <meta name="description" content="包含于 unistd.h 123long sysconf(int name);long pathconf(const char *pathname, int name);long fpathconf(int fd, int name);  使用例 1234567891011121314151617181920212223242526272829303132#include &lt;stdio.h&amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="post1">
+<meta property="og:title" content="apue 摘要">
 <meta property="og:url" content="https://scarecrow928.github.io/2021-05-28-post1">
-<meta property="og:site_name" content="Scarecrow">
-<meta property="og:description" content="post1">
+<meta property="og:site_name" content="🐎">
+<meta property="og:description" content="包含于 unistd.h 123long sysconf(int name);long pathconf(const char *pathname, int name);long fpathconf(int fd, int name);  使用例 1234567891011121314151617181920212223242526272829303132#include &lt;stdio.h&amp;">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-05-28T00:04:40.000Z">
-<meta property="article:modified_time" content="2021-05-28T08:10:04.924Z">
+<meta property="article:modified_time" content="2021-05-28T09:25:01.116Z">
 <meta property="article:author" content="Scarecrow">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Scarecrow" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="🐎" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -46,7 +46,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Scarecrow</a>
+        <a href="/" id="logo">🐎</a>
       </h1>
       
     </div>
@@ -87,7 +87,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      post1
+      apue 摘要
     </h1>
   
 
@@ -95,12 +95,17 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>post1</p>
+        <p>包含于 <code>unistd.h</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">sysconf</span><span class="params">(<span class="keyword">int</span> name)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">pathconf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> name)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">fpathconf</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> name)</span></span>;</span><br></pre></td></tr></table></figure>
 
+<p>使用例</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;limits.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span></span></span><br><span class="line"><span class="function"><span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> ARG_MAX</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ARG_MAX: %ld&quot;</span>, (<span class="keyword">long</span>)ARG_MAX);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ARG_MAX undefined\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _SC_ARG_MAX</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;_SC_ARG_MAX: %ld\n&quot;</span>, (<span class="keyword">long</span>)sysconf(_SC_ARG_MAX));</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;_SC_ARG_MAX undefined\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LINK_MAX</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;MAX_CANON: %ld&quot;</span>, (<span class="keyword">long</span>)LINK_MAX);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;LINK_MAX undefined\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _PC_LINK_MAX</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;_PC_LINK_MAX: %ld\n&quot;</span>, (<span class="keyword">long</span>)pathconf(<span class="string">&quot;/&quot;</span>, _PC_LINK_MAX));</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;_PC_LINK_MAX undefined\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ./a.out</span><br><span class="line">ARG_MAX undefined</span><br><span class="line">_SC_ARG_MAX: 2097152</span><br><span class="line">LINK_MAX undefined</span><br><span class="line">_PC_LINK_MAX: 65000</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://scarecrow928.github.io/2021-05-28-post1" data-id="ckp81ousn0001f0niab655rhi" data-title="post1" class="article-share-link">Teilen</a>
+      <a data-url="https://scarecrow928.github.io/2021-05-28-post1" data-id="ckp84dabs00008rn938c49h37" data-title="apue 摘要" class="article-share-link">Teilen</a>
       
       
       
@@ -141,7 +146,7 @@
       <ul>
         
           <li>
-            <a href="/2021-05-28-post1">post1</a>
+            <a href="/2021-05-28-post1">apue 摘要</a>
           </li>
         
       </ul>
