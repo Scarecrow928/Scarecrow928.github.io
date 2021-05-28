@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   
   
-  <title>test | Scarecrow</title>
+  <title>post1 | Scarecrow</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="A test page这是第一个页面">
-<meta property="og:type" content="website">
-<meta property="og:title" content="test">
-<meta property="og:url" content="https://scarecrow928.github.io/test">
+  <meta name="description" content="post1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="post1">
+<meta property="og:url" content="https://scarecrow928.github.io/2021-05-28-post1">
 <meta property="og:site_name" content="Scarecrow">
-<meta property="og:description" content="A test page这是第一个页面">
+<meta property="og:description" content="post1">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-05-27T22:54:35.000Z">
+<meta property="article:published_time" content="2021-05-28T00:04:40.000Z">
 <meta property="article:modified_time" content="2021-05-28T08:05:57.561Z">
 <meta property="article:author" content="Scarecrow">
 <meta name="twitter:card" content="summary">
@@ -73,10 +73,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="page-" class="h-entry article article-type-page" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-post1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/test" class="article-date">
-  <time class="dt-published" datetime="2021-05-27T22:54:35.000Z" itemprop="datePublished">2021-05-28</time>
+    <a href="/2021-05-28-post1" class="article-date">
+  <time class="dt-published" datetime="2021-05-28T00:04:40.000Z" itemprop="datePublished">2021-05-28</time>
 </a>
     
   </div>
@@ -87,7 +87,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      test
+      post1
     </h1>
   
 
@@ -95,12 +95,12 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="A-test-page"><a href="#A-test-page" class="headerlink" title="A test page"></a>A test page</h2><p>这是第一个页面</p>
+        <p>post1</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://scarecrow928.github.io/test" data-id="ckp81jk42000088ng6jlz4z96" data-title="test" class="article-share-link">Teilen</a>
+      <a data-url="https://scarecrow928.github.io/2021-05-28-post1" data-id="ckp81jk48000288ng4j9m9j99" data-title="post1" class="article-share-link">Teilen</a>
       
       
       
@@ -108,6 +108,20 @@
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/2021-05-28-hello-world" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
   
 </article>
 
