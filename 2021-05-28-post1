@@ -22,13 +22,13 @@
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;scarecrow928.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
 <meta name="description" content="包含于 unistd.h 123long sysconf(int name);long pathconf(const char *pathname, int name);long fpathconf(int fd, int name);  使用例 1234567891011121314151617181920212223242526272829303132#include &lt;stdio.h&amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="apue 摘要">
+<meta property="og:title" content="sysconf pathconf fpathconf函数">
 <meta property="og:url" content="https://scarecrow928.github.io/2021-05-28-post1">
 <meta property="og:site_name" content="🐎">
 <meta property="og:description" content="包含于 unistd.h 123long sysconf(int name);long pathconf(const char *pathname, int name);long fpathconf(int fd, int name);  使用例 1234567891011121314151617181920212223242526272829303132#include &lt;stdio.h&amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-05-28T00:04:40.000Z">
-<meta property="article:modified_time" content="2021-05-28T10:19:30.970Z">
+<meta property="article:modified_time" content="2021-05-29T03:48:46.764Z">
 <meta property="article:author" content="Scarecrow">
 <meta name="twitter:card" content="summary">
 
@@ -37,10 +37,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;scarecrow928.github.io&#x2F;2021-05-28-post1&quot;,&quot;path&quot;:&quot;2021-05-28-post1&quot;,&quot;title&quot;:&quot;apue 摘要&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;scarecrow928.github.io&#x2F;2021-05-28-post1&quot;,&quot;path&quot;:&quot;2021-05-28-post1&quot;,&quot;title&quot;:&quot;sysconf pathconf fpathconf函数&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>apue 摘要 | 🐎</title><script src="/js/config.js"></script>
+<title>sysconf pathconf fpathconf函数 | 🐎</title><script src="/js/config.js"></script>
   
 
 
@@ -119,7 +119,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -172,7 +172,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          apue 摘要
+          sysconf pathconf fpathconf函数
         </h1>
 
         <div class="post-meta-container">
@@ -182,10 +182,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-05-28 08:04:40 / 修改时间：18:19:30" itemprop="dateCreated datePublished" datetime="2021-05-28T08:04:40+08:00">2021-05-28</time>
+      <time title="创建时间：2021-05-28 08:04:40" itemprop="dateCreated datePublished" datetime="2021-05-28T08:04:40+08:00">2021-05-28</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-05-29 11:48:46" itemprop="dateModified" datetime="2021-05-29T11:48:46+08:00">2021-05-29</time>
+      </span>
 
   
 </div>
@@ -214,6 +220,15 @@
 
         
 
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021-05-28-post2" rel="next" title="open openat">
+                  open openat <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
     </footer>
   </article>
 </div>
