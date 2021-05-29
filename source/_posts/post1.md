@@ -1,5 +1,5 @@
 ---
-title: sysconf pathconf fpathconf函数
+title: sysconf pathconf fpathconf
 date: 2021-05-28 08:04:40
 tags:
 ---
