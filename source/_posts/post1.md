@@ -1,5 +1,5 @@
 ---
-title: apue 摘要
+title: sysconf pathconf fpathconf函数
 date: 2021-05-28 08:04:40
 tags:
 ---
