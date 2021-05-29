@@ -63,6 +63,8 @@ main(void)
     int not_exist_fd = openat(AT_FDCWD, "no_such_file.txt", O_RDONLY);
     if (not_exist_fd == -1) {
         perror("open \"no_such_file.txt\"");
+    } else {
+        close(not_exist_fd);
     }
     exit(0);
 }
