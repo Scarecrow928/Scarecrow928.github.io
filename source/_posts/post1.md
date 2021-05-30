@@ -1,11 +1,14 @@
 ---
 title: sysconf pathconf fpathconf
 date: 2021-05-28 08:04:40
-tags:
+tags: unix
+categories:
+- apue
 ---
 
 包含于 `unistd.h`
 ```c
+// 查看系统配置信息，对于不同unix系统结果可能不同
 long sysconf(int name);
 long pathconf(const char *pathname, int name);
 long fpathconf(int fd, int name);

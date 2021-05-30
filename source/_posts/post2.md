@@ -1,7 +1,9 @@
 ---
 title: open openat
 date: 2021-05-29 03:05:33
-tags:
+tags: unix
+categories:
+- apue
 ---
 
 包含于`fcntl.h`
@@ -25,6 +27,7 @@ openat(int __fd, const char *__path, int __oflag, ...)
 #include <unistd.h>
 #include <string.h>
 
+// 推荐buf大小为4096字节，因为ext4文件系统中一个块大小为4096字节
 #define READ_BUFSIZE 256
 
 int
