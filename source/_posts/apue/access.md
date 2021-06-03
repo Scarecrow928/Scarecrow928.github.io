@@ -8,7 +8,7 @@ categories:
 # access open的区别
 摘自*Linux Programmer's Manual*中access函数DESCRIPTION节
 
-> The  check is done using the calling process's <font size=4>**real UID and GID**</font>, rather than the effective IDs as is done when
+> The  check is done using the calling process's <font size=4 color=red>**real UID and GID**</font>, rather than the effective IDs as is done when
 actually attempting an operation (e.g., open(2)) on the file.  Similarly, for the root user,  the  check  uses
 the  set  of permitted capabilities rather than the set of effective capabilities; and for non-root users, the
 check uses an empty set of capabilities.

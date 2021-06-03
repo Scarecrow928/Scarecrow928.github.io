@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 🐎
+title: 😅
 subtitle: ''
 description: ''
 keywords:
@@ -14,7 +14,7 @@ timezone: Asia/Shanghai
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://scarecrow928.github.io
-permalink: :year-:month-:day-:title/
+permalink: :category/:title/
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
@@ -104,4 +104,4 @@ theme: next
 deploy:
   type: git
   repo: https://github.com/Scarecrow928/Scarecrow928.github.io.git
-  branch: gh-pages
+  branch: dev
