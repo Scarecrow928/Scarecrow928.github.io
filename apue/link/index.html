@@ -20,28 +20,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;scarecrow928.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta name="description" content="软链接中的实际内容为指向文件的路径，而硬链接中包含原始文件的索引节点（inode）。也就是：软连接的inode与原始文件不同，而硬链接的inode与原始文件相同。 当访问软连接时，需要通过文件中的路径来访问原始文件，而硬链接直接通过inode访问即可。 在删除原始文件后，其硬链接链接计数器会减1，若减至0则删除文件数据块。软链接中指向路径不会发生变化，而原始文件路径已经不存在了，所以再次访问软链接">
+<meta name="description" content="软链接中的实际内容为指向文件的路径，而硬链接中包含原始文件的索引节点（inode）。也就是：软链接的inode与原始文件不同，而硬链接的inode与原始文件相同。 当访问软链接时，需要通过文件中的路径来访问原始文件，而硬链接直接通过inode访问即可。 在删除原始文件后，其硬链接链接计数器会减1，若减至0则删除文件数据块。软链接中指向路径不会发生变化，而原始文件路径已经不存在了，所以再次访问软链接">
 <meta property="og:type" content="article">
-<meta property="og:title" content="软连接与硬链接的区别">
-<meta property="og:url" content="https://scarecrow928.github.io/apue/apue/link/index.html">
+<meta property="og:title" content="软链接与硬链接的区别">
+<meta property="og:url" content="https://scarecrow928.github.io/apue/link/index.html">
 <meta property="og:site_name" content="😅">
-<meta property="og:description" content="软链接中的实际内容为指向文件的路径，而硬链接中包含原始文件的索引节点（inode）。也就是：软连接的inode与原始文件不同，而硬链接的inode与原始文件相同。 当访问软连接时，需要通过文件中的路径来访问原始文件，而硬链接直接通过inode访问即可。 在删除原始文件后，其硬链接链接计数器会减1，若减至0则删除文件数据块。软链接中指向路径不会发生变化，而原始文件路径已经不存在了，所以再次访问软链接">
+<meta property="og:description" content="软链接中的实际内容为指向文件的路径，而硬链接中包含原始文件的索引节点（inode）。也就是：软链接的inode与原始文件不同，而硬链接的inode与原始文件相同。 当访问软链接时，需要通过文件中的路径来访问原始文件，而硬链接直接通过inode访问即可。 在删除原始文件后，其硬链接链接计数器会减1，若减至0则删除文件数据块。软链接中指向路径不会发生变化，而原始文件路径已经不存在了，所以再次访问软链接">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-02T19:21:35.000Z">
-<meta property="article:modified_time" content="2021-06-03T03:48:56.591Z">
+<meta property="article:modified_time" content="2021-06-08T07:25:25.179Z">
 <meta property="article:author" content="Scarecrow">
 <meta property="article:tag" content="unix">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://scarecrow928.github.io/apue/apue/link/">
+<link rel="canonical" href="https://scarecrow928.github.io/apue/link/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;scarecrow928.github.io&#x2F;apue&#x2F;apue&#x2F;link&#x2F;&quot;,&quot;path&quot;:&quot;apue&#x2F;apue&#x2F;link&#x2F;&quot;,&quot;title&quot;:&quot;软连接与硬链接的区别&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;scarecrow928.github.io&#x2F;apue&#x2F;link&#x2F;&quot;,&quot;path&quot;:&quot;apue&#x2F;link&#x2F;&quot;,&quot;title&quot;:&quot;软链接与硬链接的区别&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>软连接与硬链接的区别 | 😅</title><script src="/js/config.js"></script>
+<title>软链接与硬链接的区别 | 😅</title><script src="/js/config.js"></script>
   
 
 
@@ -120,7 +120,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -168,7 +168,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/apue/link/">
+    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/link/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -181,7 +181,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          软连接与硬链接的区别
+          软链接与硬链接的区别
         </h1>
 
         <div class="post-meta-container">
@@ -191,10 +191,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-06-03 03:21:35 / 修改时间：11:48:56" itemprop="dateCreated datePublished" datetime="2021-06-03T03:21:35+08:00">2021-06-03</time>
+      <time title="创建时间：2021-06-03 03:21:35" itemprop="dateCreated datePublished" datetime="2021-06-03T03:21:35+08:00">2021-06-03</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-06-08 15:25:25" itemprop="dateModified" datetime="2021-06-08T15:25:25+08:00">2021-06-08</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -215,8 +221,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>软链接中的实际内容为指向文件的路径，而硬链接中包含原始文件的索引节点（inode）。也就是：软连接的inode与原始文件不同，而硬链接的inode与原始文件相同。</p>
-<p>当访问软连接时，需要通过文件中的路径来访问原始文件，而硬链接直接通过inode访问即可。</p>
+        <p>软链接中的实际内容为指向文件的路径，而硬链接中包含原始文件的索引节点（inode）。也就是：软链接的inode与原始文件不同，而硬链接的inode与原始文件相同。</p>
+<p>当访问软链接时，需要通过文件中的路径来访问原始文件，而硬链接直接通过inode访问即可。</p>
 <p>在删除原始文件后，其硬链接链接计数器会减1，若减至0则删除文件数据块。软链接中指向路径不会发生变化，而原始文件路径已经不存在了，所以再次访问软链接会报错<code>No such file or directory</code>，而硬链接因为在创建时，向原始文件的硬链接计数器<code>st_nlink</code>加1了，因此删除原始文件也只是使其减1，并没有删除数据块，硬链接仍然能访问原始数据块。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stat</span> &#123;</span></span><br><span class="line">    <span class="keyword">dev_t</span>     st_dev;         <span class="comment">/* ID of device containing file */</span></span><br><span class="line">    <span class="keyword">ino_t</span>     st_ino;         <span class="comment">/* Inode number */</span></span><br><span class="line">    <span class="keyword">mode_t</span>    st_mode;        <span class="comment">/* File type and mode */</span></span><br><span class="line">    <span class="keyword">nlink_t</span>   st_nlink;       <span class="comment">/* Number of hard links 硬链接计数器在这里 */</span> </span><br><span class="line">    <span class="keyword">uid_t</span>     st_uid;         <span class="comment">/* User ID of owner */</span></span><br><span class="line">    <span class="keyword">gid_t</span>     st_gid;         <span class="comment">/* Group ID of owner */</span></span><br><span class="line">    <span class="keyword">dev_t</span>     st_rdev;        <span class="comment">/* Device ID (if special file) */</span></span><br><span class="line">    <span class="keyword">off_t</span>     st_size;        <span class="comment">/* Total size, in bytes */</span></span><br><span class="line">    <span class="keyword">blksize_t</span> st_blksize;     <span class="comment">/* Block size for filesystem I/O */</span></span><br><span class="line">    <span class="keyword">blkcnt_t</span>  st_blocks;      <span class="comment">/* Number of 512B blocks allocated */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timespec</span> <span class="title">st_atim</span>;</span>  <span class="comment">/* Time of last access */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timespec</span> <span class="title">st_mtim</span>;</span>  <span class="comment">/* Time of last modification */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timespec</span> <span class="title">st_ctim</span>;</span>  <span class="comment">/* Time of last status change */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>在shell中测试删除效果</p>
@@ -236,11 +242,14 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/apue/apue/access/" rel="prev" title="access open的区别">
+                <a href="/apue/access/" rel="prev" title="access open的区别">
                   <i class="fa fa-chevron-left"></i> access open的区别
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/apue/segment/" rel="next" title="C程序中的存储空间布局">
+                  C程序中的存储空间布局 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
