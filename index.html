@@ -115,7 +115,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -162,6 +162,93 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/fork/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Scarecrow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="😅">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/apue/fork/" class="post-title-link" itemprop="url">fork exec</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-06-09 03:34:58 / 修改时间：17:32:50" itemprop="dateCreated datePublished" datetime="2021-06-09T03:34:58+08:00">2021-06-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/apue/" itemprop="url" rel="index"><span itemprop="name">apue</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="fork"><a href="#fork" class="headerlink" title="fork"></a><code>fork</code></h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Linux</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">fork</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="父进程与子进程的关系"><a href="#父进程与子进程的关系" class="headerlink" title="父进程与子进程的关系"></a>父进程与子进程的关系</h2><ol>
+<li><code>fork</code>函数父进程返回子进程pid，子进程返回<code>0</code></li>
+<li>父进程与子进程的全局变量不共享。出于效率，变量是“写时复制”的，父子任意进程写入变量前，创建存储区副本</li>
+<li>父进程与子进程的文件描述符也是复制的，在父进程打开文件后<code>fork</code>，则子进程也已打开了文件，需要同步措施防止它们同时读写文件</li>
+<li>子进程继承了实际id、有效id，工作目录等等</li>
+</ol>
+<h1 id="exec"><a href="#exec" class="headerlink" title="exec"></a><code>exec</code></h1><h2 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span> **environ;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">execl</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">const</span> <span class="keyword">char</span> *arg, ...</span></span></span><br><span class="line"><span class="params"><span class="function">                <span class="comment">/* (char  *) NULL */</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">execlp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *file, <span class="keyword">const</span> <span class="keyword">char</span> *arg, ...</span></span></span><br><span class="line"><span class="params"><span class="function">                <span class="comment">/* (char  *) NULL */</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">execle</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">const</span> <span class="keyword">char</span> *arg, ...</span></span></span><br><span class="line"><span class="params"><span class="function">                <span class="comment">/*, (char *) NULL, char *const envp[] */</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">execv</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">char</span> *<span class="keyword">const</span> argv[])</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">execvp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *file, <span class="keyword">char</span> *<span class="keyword">const</span> argv[])</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">execvpe</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *file, <span class="keyword">char</span> *<span class="keyword">const</span> argv[],</span></span></span><br><span class="line"><span class="params"><span class="function">                <span class="keyword">char</span> *<span class="keyword">const</span> envp[])</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ol>
+<li><code>pathname</code>为路径名，绝对相对均可；<code>file</code>为文件名，若含<code>&quot;/&quot;</code>字符，视为文件名，否则在<code>PATH</code>环境变量中路径搜索可执行文件或shell脚本</li>
+<li>与<code>fork</code>不同，<code>exec</code>并不产生新进程，它将原始进程的代码段、全局变量数据段、堆、栈替换为新进程，新进程<code>pid</code>并不会改变</li>
+</ol>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// t18.c，可执行文件为mypid，由exec启动这个进程</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span></span></span><br><span class="line"><span class="function"><span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;my pid: %d\n&quot;</span>, getpid());</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// t19.c，原始进程，将启动./mypid</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span></span></span><br><span class="line"><span class="function"><span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;before exec, my pid: %d\n&quot;</span>, getpid());</span><br><span class="line">    execl(<span class="string">&quot;./mypid&quot;</span>, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;this line\n&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译，运行：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> cc t18.c <span class="literal">-o</span> mypid</span><br><span class="line"><span class="variable">$</span> cc t19.c</span><br><span class="line"><span class="variable">$</span> ./a.out </span><br><span class="line">before exec, my pid: <span class="number">1520</span></span><br><span class="line">my pid: <span class="number">1520</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/malloc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -185,10 +272,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-06-08 06:48:38 / 修改时间：15:25:25" itemprop="dateCreated datePublished" datetime="2021-06-08T06:48:38+08:00">2021-06-08</time>
+      <time title="创建时间：2021-06-08 06:48:38" itemprop="dateCreated datePublished" datetime="2021-06-08T06:48:38+08:00">2021-06-08</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-06-09 17:32:50" itemprop="dateModified" datetime="2021-06-09T17:32:50+08:00">2021-06-09</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -280,7 +373,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-08 15:25:25" itemprop="dateModified" datetime="2021-06-08T15:25:25+08:00">2021-06-08</time>
+        <time title="修改时间：2021-06-09 17:32:50" itemprop="dateModified" datetime="2021-06-09T17:32:50+08:00">2021-06-09</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -390,7 +483,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-08 15:25:25" itemprop="dateModified" datetime="2021-06-08T15:25:25+08:00">2021-06-08</time>
+        <time title="修改时间：2021-06-09 17:32:50" itemprop="dateModified" datetime="2021-06-09T17:32:50+08:00">2021-06-09</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -474,7 +567,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-08 15:25:25" itemprop="dateModified" datetime="2021-06-08T15:25:25+08:00">2021-06-08</time>
+        <time title="修改时间：2021-06-09 17:32:50" itemprop="dateModified" datetime="2021-06-09T17:32:50+08:00">2021-06-09</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -562,7 +655,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-08 15:25:25" itemprop="dateModified" datetime="2021-06-08T15:25:25+08:00">2021-06-08</time>
+        <time title="修改时间：2021-06-09 17:32:50" itemprop="dateModified" datetime="2021-06-09T17:32:50+08:00">2021-06-09</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -753,7 +846,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-08 15:25:25" itemprop="dateModified" datetime="2021-06-08T15:25:25+08:00">2021-06-08</time>
+        <time title="修改时间：2021-06-09 17:32:50" itemprop="dateModified" datetime="2021-06-09T17:32:50+08:00">2021-06-09</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -838,7 +931,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-08 15:25:25" itemprop="dateModified" datetime="2021-06-08T15:25:25+08:00">2021-06-08</time>
+        <time title="修改时间：2021-06-09 17:32:50" itemprop="dateModified" datetime="2021-06-09T17:32:50+08:00">2021-06-09</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
