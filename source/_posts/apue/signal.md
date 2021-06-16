@@ -1,5 +1,5 @@
 ---
-title: 信号机制
+title: 信号机制（1）
 date: 2021-06-12 08:53:49
 tags: unix
 categories:
@@ -51,7 +51,7 @@ sighandler_t signal(int signum, sighandler_t handler);
 ```
 
 一般情况下，用`kill`杀死进程的过程如下：
-1. `kill`向指定进程发出`SIGTERM`，
+1. `kill`向指定进程发出`SIGTERM`
 2. 进程接受到信号，寻找信号处理函数
 3. 执行系统默认行为，终止进程
 
@@ -91,3 +91,4 @@ handle signal: 15
 exit
 $
 ```
+
