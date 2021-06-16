@@ -423,7 +423,7 @@ github_banner:
 # ---------------------------------------------------------------
 
 font:
-  enable: false
+  enable: true
 
   # Uri of fonts host, e.g. https://fonts.googleapis.com (Default).
   host:
@@ -455,6 +455,7 @@ font:
   posts:
     external: true
     family:
+    size: 0.8
 
   # Font settings for <code> and code blocks.
   codes:
