@@ -115,7 +115,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -124,7 +124,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -167,6 +167,117 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/thread/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Scarecrow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="😅">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/apue/thread/" class="post-title-link" itemprop="url">线程库pthread（1）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-16 11:42:45" itemprop="dateCreated datePublished" datetime="2021-06-16T11:42:45+08:00">2021-06-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-06-18 16:58:16" itemprop="dateModified" datetime="2021-06-18T16:58:16+08:00">2021-06-18</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/apue/" itemprop="url" rel="index"><span itemprop="name">apue</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><p>这部分APUE没有详细介绍，资料来自网络</p>
+<h2 id="线程生命周期"><a href="#线程生命周期" class="headerlink" title="线程生命周期"></a>线程生命周期</h2><p><img src="/images/thread_lifecycle.jpg"></p>
+<h2 id="进程，线程，协程"><a href="#进程，线程，协程" class="headerlink" title="进程，线程，协程"></a>进程，线程，协程</h2><ul>
+<li><p>进程是资源分配的最小单位，例如全局变量、代码段、堆、栈等。</p>
+</li>
+<li><p>线程是系统调度的最小单位，线程之间共享进程的资源。</p>
+</li>
+<li><p>协程可以理解为用户层的线程，其调度不由操作系统进行而由用户应用进行，相比线程更加轻量。</p>
+</li>
+</ul>
+<h1 id="pthread使用"><a href="#pthread使用" class="headerlink" title="pthread使用"></a>pthread使用</h1><p>编译使用了pthread的程序时，需要输入<code>cc -pthread xxx.c</code></p>
+<h2 id="pthread-t"><a href="#pthread-t" class="headerlink" title="pthread_t"></a>pthread_t</h2><p>线程标识符，linux上实现为<code>unsigned long</code>，可以直接打印</p>
+<h2 id="pthread-create"><a href="#pthread-create" class="headerlink" title="pthread_create"></a>pthread_create</h2><p>创建一个线程，立即开始执行，参数分别为：</p>
+<ul>
+<li>线程id</li>
+<li>线程属性</li>
+<li>任务函数</li>
+<li>函数参数，可以传入结构体表示多个参数<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_create</span><span class="params">(<span class="keyword">pthread_t</span> *thread, <span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *attr,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="keyword">void</span> *(*start_routine) (<span class="keyword">void</span> *), <span class="keyword">void</span> *arg)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="pthread-exit"><a href="#pthread-exit" class="headerlink" title="pthread_exit"></a>pthread_exit</h2>正常退出线程，也可以在线程里返回以终止线程<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pthread_exit</span><span class="params">(<span class="keyword">void</span> *retval)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="线程同步机制"><a href="#线程同步机制" class="headerlink" title="线程同步机制"></a>线程同步机制</h2><h3 id="pthread-mutex-t"><a href="#pthread-mutex-t" class="headerlink" title="pthread_mutex_t"></a>pthread_mutex_t</h3>互斥锁，只能有一个线程获得互斥锁，若获取不到<code>lock</code>将阻塞，<code>trylock</code>返回<code> EBUSY</code><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_init</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *<span class="keyword">restrict</span> mutex,</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="keyword">const</span> <span class="keyword">pthread_mutexattr_t</span> *<span class="keyword">restrict</span> attr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果不用堆内存，可以这样初始化</span></span><br><span class="line"><span class="keyword">pthread_mutex_t</span> mutex = PTHREAD_MUTEX_INITIALIZER;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_lock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_trylock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_unlock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="pthread-rwlock-t"><a href="#pthread-rwlock-t" class="headerlink" title="pthread_rwlock_t"></a>pthread_rwlock_t</h3><p>读写锁，读写之间互斥，写之间互斥，读之间不互斥。也有<code>trylock</code> 版本</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_init</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *<span class="keyword">restrict</span> rwlock,</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="keyword">const</span> <span class="keyword">pthread_rwlockattr_t</span> *<span class="keyword">restrict</span> attr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_rdlock</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *rwlock)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_wrlock</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *rwlock)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_unlock</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *rwlock)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="pthread-cond-t"><a href="#pthread-cond-t" class="headerlink" title="pthread_cond_t"></a><font color=red>pthread_cond_t</font></h3><p>条件变量，有点类似进程控制中的<code>sigsuspend</code>，等待特定信号到达后继续运行。发送信号可以单播也可以广播</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_init</span><span class="params">(<span class="keyword">pthread_cond_t</span> *<span class="keyword">restrict</span> cond,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="keyword">const</span> <span class="keyword">pthread_condattr_t</span> *<span class="keyword">restrict</span> attr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 线程开始等待条件到达</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_wait</span><span class="params">(<span class="keyword">pthread_cond_t</span> *<span class="keyword">restrict</span> cond,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="keyword">pthread_mutex_t</span> *<span class="keyword">restrict</span> mutex)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送信号，唤醒等待条件的线程</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_signal</span><span class="params">(<span class="keyword">pthread_cond_t</span> *cond)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_broadcast</span><span class="params">(<span class="keyword">pthread_cond_t</span> *cond)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>条件变量需要用<code>mutex</code>保护，一个模板写法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局mutex，用于同步各线程，保护条件</span></span><br><span class="line"><span class="keyword">pthread_mutex_t</span> mutex;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 我是否可以行动的条件</span></span><br><span class="line"><span class="keyword">pthread_cond_t</span> cond; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 模板 </span></span><br><span class="line">pthread_mutex_lock(&amp;mutex);</span><br><span class="line"><span class="keyword">while</span> (<span class="comment">/* 条件没达成吗 */</span>)</span><br><span class="line">    pthread_cond_wait(&amp;cond, &amp;mutex);</span><br><span class="line"><span class="comment">/* 临界区代码在此 */</span></span><br><span class="line">pthread_mutex_unlock(&amp;mutex);</span><br><span class="line"><span class="comment">// 非临界区</span></span><br></pre></td></tr></table></figure>
+<p>这是一个等待条件的线程的模板，当线程发现还没轮到它运行，会挂起，直到有一个其他线程发出了<code>pthread_cond_signal(&amp;cond)</code>，并且<code>mutex</code>可以获取，线程才能从<code>pthread_cond_wait</code>返回。</p>
+<p>这种方式避免了使用自旋锁。若使用自旋锁，CPU会因为重复判断条件而一直处于高负荷状态，对系统整体效率影响很大。</p>
+<h3 id="pthread-barrier-t"><a href="#pthread-barrier-t" class="headerlink" title="pthread_barrier_t"></a>pthread_barrier_t</h3><p>屏障，必须在指定个数线程到达屏障后，这些线程才能继续运行，<code>count</code>表示线程数</p>
+<p>注意，屏障可以重复使用，每次都会等待<code>count</code>个线程到达后放行，不需要重复初始化</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_barrier_init</span><span class="params">(<span class="keyword">pthread_barrier_t</span> *<span class="keyword">restrict</span> barrier,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="keyword">const</span> <span class="keyword">pthread_barrierattr_t</span> *<span class="keyword">restrict</span> attr, <span class="keyword">unsigned</span> count)</span></span>;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/signal2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -198,7 +309,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-18 16:42:36" itemprop="dateModified" datetime="2021-06-18T16:42:36+08:00">2021-06-18</time>
+        <time title="修改时间：2021-06-18 16:58:16" itemprop="dateModified" datetime="2021-06-18T16:58:16+08:00">2021-06-18</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -290,7 +401,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-18 16:42:36" itemprop="dateModified" datetime="2021-06-18T16:42:36+08:00">2021-06-18</time>
+        <time title="修改时间：2021-06-18 16:58:16" itemprop="dateModified" datetime="2021-06-18T16:58:16+08:00">2021-06-18</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -417,7 +528,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-18 16:42:36" itemprop="dateModified" datetime="2021-06-18T16:42:36+08:00">2021-06-18</time>
+        <time title="修改时间：2021-06-18 16:58:16" itemprop="dateModified" datetime="2021-06-18T16:58:16+08:00">2021-06-18</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -510,7 +621,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-18 16:42:36" itemprop="dateModified" datetime="2021-06-18T16:42:36+08:00">2021-06-18</time>
+        <time title="修改时间：2021-06-18 16:58:16" itemprop="dateModified" datetime="2021-06-18T16:58:16+08:00">2021-06-18</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -603,7 +714,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-18 16:42:36" itemprop="dateModified" datetime="2021-06-18T16:42:36+08:00">2021-06-18</time>
+        <time title="修改时间：2021-06-18 16:58:16" itemprop="dateModified" datetime="2021-06-18T16:58:16+08:00">2021-06-18</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -713,7 +824,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-18 16:42:36" itemprop="dateModified" datetime="2021-06-18T16:42:36+08:00">2021-06-18</time>
+        <time title="修改时间：2021-06-18 16:58:16" itemprop="dateModified" datetime="2021-06-18T16:58:16+08:00">2021-06-18</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -797,7 +908,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-18 16:42:36" itemprop="dateModified" datetime="2021-06-18T16:42:36+08:00">2021-06-18</time>
+        <time title="修改时间：2021-06-18 16:58:16" itemprop="dateModified" datetime="2021-06-18T16:58:16+08:00">2021-06-18</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -885,7 +996,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-18 16:42:36" itemprop="dateModified" datetime="2021-06-18T16:42:36+08:00">2021-06-18</time>
+        <time title="修改时间：2021-06-18 16:58:16" itemprop="dateModified" datetime="2021-06-18T16:58:16+08:00">2021-06-18</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1095,7 +1206,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-18 16:42:36" itemprop="dateModified" datetime="2021-06-18T16:42:36+08:00">2021-06-18</time>
+        <time title="修改时间：2021-06-18 16:58:16" itemprop="dateModified" datetime="2021-06-18T16:58:16+08:00">2021-06-18</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1141,91 +1252,9 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/post1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Scarecrow">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="😅">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/apue/post1/" class="post-title-link" itemprop="url">sysconf pathconf fpathconf</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-05-28 08:04:40" itemprop="dateCreated datePublished" datetime="2021-05-28T08:04:40+08:00">2021-05-28</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-18 16:42:36" itemprop="dateModified" datetime="2021-06-18T16:42:36+08:00">2021-06-18</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/apue/" itemprop="url" rel="index"><span itemprop="name">apue</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>包含于 <code>unistd.h</code></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看系统配置信息，对于不同unix系统结果可能不同</span></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">sysconf</span><span class="params">(<span class="keyword">int</span> name)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">pathconf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> name)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">fpathconf</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> name)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>使用例</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;limits.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span></span></span><br><span class="line"><span class="function"><span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> ARG_MAX</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ARG_MAX: %ld&quot;</span>, (<span class="keyword">long</span>)ARG_MAX);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ARG_MAX undefined\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _SC_ARG_MAX</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;_SC_ARG_MAX: %ld\n&quot;</span>, (<span class="keyword">long</span>)sysconf(_SC_ARG_MAX));</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;_SC_ARG_MAX undefined\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LINK_MAX</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;MAX_CANON: %ld&quot;</span>, (<span class="keyword">long</span>)LINK_MAX);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;LINK_MAX undefined\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _PC_LINK_MAX</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;_PC_LINK_MAX: %ld\n&quot;</span>, (<span class="keyword">long</span>)pathconf(<span class="string">&quot;/&quot;</span>, _PC_LINK_MAX));</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;_PC_LINK_MAX undefined\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ./a.out</span><br><span class="line">ARG_MAX undefined</span><br><span class="line">_SC_ARG_MAX: 2097152</span><br><span class="line">LINK_MAX undefined</span><br><span class="line">_PC_LINK_MAX: 65000</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 <script src="/js/comments.js"></script>
 </div>
   </main>
