@@ -115,7 +115,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,6 +167,301 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/stat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Scarecrow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="😅">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/apue/stat/" class="post-title-link" itemprop="url">unix文件访问权限，stat fstat lstat</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-31 03:46:59" itemprop="dateCreated datePublished" datetime="2021-05-31T03:46:59+08:00">2021-05-31</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-06-26 15:32:30" itemprop="dateModified" datetime="2021-06-26T15:32:30+08:00">2021-06-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/apue/" itemprop="url" rel="index"><span itemprop="name">apue</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="实际用户id-有效用户id-保存的设置用户id"><a href="#实际用户id-有效用户id-保存的设置用户id" class="headerlink" title="实际用户id 有效用户id 保存的设置用户id"></a>实际用户id 有效用户id 保存的设置用户id</h1><p>与进程关联的id有至少6个：</p>
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">read id</td>
+<td align="center">实际用户id，进程的运行者</td>
+</tr>
+<tr>
+<td align="center">read group id</td>
+<td align="center">实际组id，进程的运行者所在组</td>
+</tr>
+<tr>
+<td align="center">effective user id</td>
+<td align="center">有效用户id，进程文件访问权限</td>
+</tr>
+<tr>
+<td align="center">effective group id</td>
+<td align="center">有效组id，进程文件访问权限</td>
+</tr>
+<tr>
+<td align="center">saved user id</td>
+<td align="center">有效用户id的副本</td>
+</tr>
+<tr>
+<td align="center">saved group id</td>
+<td align="center">有效组id的副本</td>
+</tr>
+</tbody></table>
+<p>通常实际id不会改变，有效id等于实际id，但在某些情况下可能有效id会改变，例如运行<code>passwd</code>。</p>
+<h2 id="保存的设置用户id"><a href="#保存的设置用户id" class="headerlink" title="保存的设置用户id"></a>保存的设置用户id</h2><p>某些程序，例如<code>at</code>，普通用户能够执行<code>at</code>，但<code>at</code>有时需要超级用户权限，有时候则必须以普通用户权限运行。保存的设置用户id在这时发挥效果，它可以用来判断<code>at</code>是否能将其有效用户id设置为超级用户。</p>
+<p><code>at</code>的所有者是超级用户<code>root</code>，并且其文件权限设置了<code>setuid</code>位，因此普通用户它运行它时：</p>
+<ul>
+<li>实际用户id：普通用户</li>
+<li>有效用户id：root</li>
+<li>保存的设置用户id：root</li>
+</ul>
+<p>在需要降低权限时：</p>
+<ul>
+<li>实际用户id：普通用户</li>
+<li>有效用户id：普通用户</li>
+<li>保存的设置用户id：root</li>
+</ul>
+<p>需要恢复特权时，保存的设置用户id指出，这个进程是能够恢复成<code>root</code>的，因为它的保存的设置用户id等于<code>root</code>！<code>seteuid</code>函数允许输入的<code>uid</code>等于保存的设置用户id，或者实际用户id：</p>
+<ul>
+<li>实际用户id：普通用户</li>
+<li>有效用户id：root，能够设置！</li>
+<li>保存的设置用户id：root</li>
+</ul>
+<h1 id="文件访问权限"><a href="#文件访问权限" class="headerlink" title="文件访问权限"></a>文件访问权限</h1><p>每个文件有9个访问权限位，从左至右：</p>
+<table>
+<thead>
+<tr>
+<th align="center">st_mode掩码</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">S_IRUSR</td>
+<td align="center">拥有者读</td>
+</tr>
+<tr>
+<td align="center">S_IWUSR</td>
+<td align="center">拥有者写</td>
+</tr>
+<tr>
+<td align="center">S_IXUSR</td>
+<td align="center">拥有者执行</td>
+</tr>
+<tr>
+<td align="center">S_IRGRP</td>
+<td align="center">组内用户读</td>
+</tr>
+<tr>
+<td align="center">S_IWGRP</td>
+<td align="center">组内用户写</td>
+</tr>
+<tr>
+<td align="center">S_IXGRP</td>
+<td align="center">组内用户执行</td>
+</tr>
+<tr>
+<td align="center">S_IROTH</td>
+<td align="center">其他用户读</td>
+</tr>
+<tr>
+<td align="center">S_IWOTH</td>
+<td align="center">其他用户写</td>
+</tr>
+<tr>
+<td align="center">S_IXOTH</td>
+<td align="center">其他用户执行</td>
+</tr>
+</tbody></table>
+<p>另外包含3位特殊位，在<code>ls -l</code>中不显示，从左至右为：</p>
+<table>
+<thead>
+<tr>
+<th align="center">st_mode掩码</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">S_ISUID</td>
+<td align="center">执行时设置有效用户id位为拥有者</td>
+</tr>
+<tr>
+<td align="center">S_ISGID</td>
+<td align="center">执行时设置有效组id位为拥有者所在组</td>
+</tr>
+<tr>
+<td align="center">S_ISVTX</td>
+<td align="center">拥有者才能删除、重命名</td>
+</tr>
+</tbody></table>
+<p>由于<code>/usr/bin/passwd</code>在运行时能够修改用户密码等内容，也就是修改<code>/etc/passwd</code>中内容，但是<code>/etc/passwd</code>只有<code>root</code>用户才能修改。因此普通用户若需要运行<code>passwd</code>命令，就需要将<code>effective id</code>设为超级用户，于是<code>/usr/bin/passwd</code>文件设置了<code>S_ISUID</code>位：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ stat /usr/bin/passwd</span><br><span class="line">  File: /usr/bin/passwd</span><br><span class="line">  Size: 68208           Blocks: 136        IO Block: 4096   regular file</span><br><span class="line">Device: 830h/2096d      Inode: 2102        Links: 1</span><br><span class="line">Access: (4755/-rwsr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)</span><br><span class="line">Access: 2021-03-25 15:43:40.040000000 +0800</span><br><span class="line">Modify: 2020-05-28 14:37:47.000000000 +0800</span><br><span class="line">Change: 2021-03-25 15:43:25.060000000 +0800</span><br><span class="line"> Birth: -</span><br></pre></td></tr></table></figure>
+
+<p>注意<code>Access: (4755/-rwsr-xr-x)</code>，<code>4755</code>二进制表示为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">100 111 101 101</span><br></pre></td></tr></table></figure>
+<p>左边3位对应特殊位，右边9位为读写执行权限位，passwd程序<code>S_ISUID = 1</code></p>
+<h1 id="stat-fstat-lstat"><a href="#stat-fstat-lstat" class="headerlink" title="stat fstat lstat"></a>stat fstat lstat</h1><p><code>man 2 stat</code>中对这三个函数定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">stat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, struct stat *statbuf)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fstat</span><span class="params">(<span class="keyword">int</span> fd, struct stat *statbuf)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lstat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, struct stat *statbuf)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>关于<code>struct stat</code>结构体可以直接运行<code>man 2 stat</code>查看。三个函数可用于查看文件属性，查询结果保存于<code>statbuff</code>中，<code>stat</code>与<code>lstat</code>的区别在于<code>lstat</code>不会解析链接而<code>stat</code>会。</p>
+<p>放一个用<code>fstat</code>查看<code>/usr/bin/passwd</code>的设置有效用户id位代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span></span></span><br><span class="line"><span class="function"><span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>             fd_passwd = open(<span class="string">&quot;/usr/bin/passwd&quot;</span>, O_RDONLY);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stat</span>     <span class="title">stat_passwd</span>;</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="number">-1</span> == fstat(fd_passwd, &amp;stat_passwd)) &#123;</span><br><span class="line">        perror(<span class="string">&quot;fstat /usr/bin/passwd error&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;/usr/bin/passwd st_mode: %x, S_ISUID: %x\n&quot;</span>, </span><br><span class="line">        stat_passwd.st_mode, S_ISUID);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;/usr/bin/passwd st_uid: %s\n&quot;</span>, </span><br><span class="line">        (stat_passwd.st_mode &amp; S_ISUID) ? <span class="string">&quot;true&quot;</span> : <span class="string">&quot;false&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./a.out </span><br><span class="line">/usr/bin/passwd st_mode: 89ed, S_ISUID: 800</span><br><span class="line">/usr/bin/passwd st_uid: true</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/post2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Scarecrow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="😅">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/apue/post2/" class="post-title-link" itemprop="url">open openat</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-29 03:05:33" itemprop="dateCreated datePublished" datetime="2021-05-29T03:05:33+08:00">2021-05-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-06-26 15:32:30" itemprop="dateModified" datetime="2021-06-26T15:32:30+08:00">2021-06-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/apue/" itemprop="url" rel="index"><span itemprop="name">apue</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>包含于<code>fcntl.h</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// open通过绝对路径或当前目录的相对路径打开文件，返回fd</span></span><br><span class="line">open(<span class="keyword">const</span> <span class="keyword">char</span> *__path, <span class="keyword">int</span> __oflag, ...)</span><br><span class="line"></span><br><span class="line"><span class="comment">// openat 可以将__fd视为当前目录，__path为相对路径，也可令__fd = AT_FDCWD 使其为当前目录</span></span><br><span class="line"><span class="comment">// 若__path是绝对路径，__fd无效</span></span><br><span class="line">openat(<span class="keyword">int</span> __fd, <span class="keyword">const</span> <span class="keyword">char</span> *__path, <span class="keyword">int</span> __oflag, ...)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 两个函数出错均返回-1，errno设为错误值</span></span><br></pre></td></tr></table></figure>
+
+<p>使用例</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 推荐buf大小为4096字节，因为ext4文件系统中一个块大小为4096字节</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> READ_BUFSIZE 256</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span></span></span><br><span class="line"><span class="function"><span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> dir_fd = open(<span class="string">&quot;.&quot;</span>, O_RDONLY);</span><br><span class="line">    <span class="keyword">if</span> (dir_fd &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;dir open failed&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> data_fd = openat(dir_fd, <span class="string">&quot;data.txt&quot;</span>, O_RDONLY);</span><br><span class="line">    <span class="keyword">if</span> (data_fd &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;data.txt open failed&quot;</span>);</span><br><span class="line">        close(dir_fd);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;dir_fd: %d, data_fd: %d\n&quot;</span>, dir_fd, data_fd);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> buf[READ_BUFSIZE];</span><br><span class="line">    <span class="keyword">ssize_t</span> bytes, total = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> ((bytes = read(data_fd, buf, READ_BUFSIZE)) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;byted read: %d\n&quot;</span>, (<span class="keyword">int</span>)bytes);</span><br><span class="line">        total += bytes;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    close(data_fd);</span><br><span class="line">    close(dir_fd);</span><br><span class="line">    <span class="keyword">if</span> (bytes == <span class="number">-1</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;read error&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;read from data.txt: %d bytes\n&quot;</span>, (<span class="keyword">int</span>)total);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> not_exist_fd = openat(AT_FDCWD, <span class="string">&quot;no_such_file.txt&quot;</span>, O_RDONLY);</span><br><span class="line">    <span class="keyword">if</span> (not_exist_fd == <span class="number">-1</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;open \&quot;no_such_file.txt\&quot;&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        close(not_exist_fd);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ./a.out</span><br><span class="line">dir_fd: 3, data_fd: 4</span><br><span class="line">byted read: 256</span><br><span class="line">byted read: 97</span><br><span class="line">read from data.txt: 353 bytes</span><br><span class="line">open &quot;no_such_file.txt&quot;: No such file or directory</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/post1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -198,7 +493,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-18 16:58:16" itemprop="dateModified" datetime="2021-06-18T16:58:16+08:00">2021-06-18</time>
+        <time title="修改时间：2021-06-26 15:32:30" itemprop="dateModified" datetime="2021-06-26T15:32:30+08:00">2021-06-26</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

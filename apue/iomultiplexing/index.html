@@ -20,28 +20,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;scarecrow928.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta name="description" content="包含于 unistd.h 1234&#x2F;&#x2F; 查看系统配置信息，对于不同unix系统结果可能不同long sysconf(int name);long pathconf(const char *pathname, int name);long fpathconf(int fd, int name);  使用例 12345678910111213141516171819202122232425262728">
+<meta name="description" content="selectselect函数，可以传入想观察的fd_set类型的三个集合，分别表示读、写、异常的fd。nfds表示监听的最大fd值+1，可以设置为FD_SETSIZE表示最大值。 返回已就绪的fd数量，它是三个集合中已就绪的fd数之和。 select对于n个fd，其时间复杂度为O(n) 123 #include &lt;sys&#x2F;select.h&gt;int select(int nfds, fd">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sysconf pathconf fpathconf">
-<meta property="og:url" content="https://scarecrow928.github.io/apue/post1/index.html">
+<meta property="og:title" content="IO多路复用">
+<meta property="og:url" content="https://scarecrow928.github.io/apue/iomultiplexing/index.html">
 <meta property="og:site_name" content="😅">
-<meta property="og:description" content="包含于 unistd.h 1234&#x2F;&#x2F; 查看系统配置信息，对于不同unix系统结果可能不同long sysconf(int name);long pathconf(const char *pathname, int name);long fpathconf(int fd, int name);  使用例 12345678910111213141516171819202122232425262728">
+<meta property="og:description" content="selectselect函数，可以传入想观察的fd_set类型的三个集合，分别表示读、写、异常的fd。nfds表示监听的最大fd值+1，可以设置为FD_SETSIZE表示最大值。 返回已就绪的fd数量，它是三个集合中已就绪的fd数之和。 select对于n个fd，其时间复杂度为O(n) 123 #include &lt;sys&#x2F;select.h&gt;int select(int nfds, fd">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-28T00:04:40.000Z">
+<meta property="article:published_time" content="2021-06-21T03:04:24.000Z">
 <meta property="article:modified_time" content="2021-06-26T07:32:30.035Z">
 <meta property="article:author" content="Scarecrow">
 <meta property="article:tag" content="unix">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://scarecrow928.github.io/apue/post1/">
+<link rel="canonical" href="https://scarecrow928.github.io/apue/iomultiplexing/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;scarecrow928.github.io&#x2F;apue&#x2F;post1&#x2F;&quot;,&quot;path&quot;:&quot;apue&#x2F;post1&#x2F;&quot;,&quot;title&quot;:&quot;sysconf pathconf fpathconf&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;scarecrow928.github.io&#x2F;apue&#x2F;iomultiplexing&#x2F;&quot;,&quot;path&quot;:&quot;apue&#x2F;iomultiplexing&#x2F;&quot;,&quot;title&quot;:&quot;IO多路复用&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>sysconf pathconf fpathconf | 😅</title><script src="/js/config.js"></script>
+<title>IO多路复用 | 😅</title><script src="/js/config.js"></script>
   
 
 
@@ -95,7 +95,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -108,6 +108,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#select"><span class="nav-number">1.</span> <span class="nav-text">select</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poll"><span class="nav-number">2.</span> <span class="nav-text">poll</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#epoll"><span class="nav-number">3.</span> <span class="nav-text">epoll</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -173,7 +174,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/post1/">
+    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/iomultiplexing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -186,7 +187,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          sysconf pathconf fpathconf
+          IO多路复用
         </h1>
 
         <div class="post-meta-container">
@@ -197,7 +198,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2021-05-28 08:04:40" itemprop="dateCreated datePublished" datetime="2021-05-28T08:04:40+08:00">2021-05-28</time>
+      <time title="创建时间：2021-06-21 11:04:24" itemprop="dateCreated datePublished" datetime="2021-06-21T11:04:24+08:00">2021-06-21</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
@@ -226,13 +227,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>包含于 <code>unistd.h</code></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看系统配置信息，对于不同unix系统结果可能不同</span></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">sysconf</span><span class="params">(<span class="keyword">int</span> name)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">pathconf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> name)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">fpathconf</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> name)</span></span>;</span><br></pre></td></tr></table></figure>
+        <h2 id="select"><a href="#select" class="headerlink" title="select"></a>select</h2><p><code>select</code>函数，可以传入想观察的<code>fd_set</code>类型的三个集合，分别表示读、写、异常的fd。<code>nfds</code>表示监听的最大fd值+1，可以设置为<code>FD_SETSIZE</code>表示最大值。</p>
+<p>返回已就绪的fd数量，它是三个集合中已就绪的fd数之和。</p>
+<p>select对于<code>n</code>个fd，其时间复杂度为<code>O(n)</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/select.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">select</span><span class="params">(<span class="keyword">int</span> nfds, fd_set *readfds, fd_set *writefds,</span></span></span><br><span class="line"><span class="params"><span class="function">            fd_set *exceptfds, struct timeval *timeout)</span></span>;</span><br></pre></td></tr></table></figure>
 
-<p>使用例</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;limits.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span></span></span><br><span class="line"><span class="function"><span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> ARG_MAX</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ARG_MAX: %ld&quot;</span>, (<span class="keyword">long</span>)ARG_MAX);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ARG_MAX undefined\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _SC_ARG_MAX</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;_SC_ARG_MAX: %ld\n&quot;</span>, (<span class="keyword">long</span>)sysconf(_SC_ARG_MAX));</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;_SC_ARG_MAX undefined\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LINK_MAX</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;MAX_CANON: %ld&quot;</span>, (<span class="keyword">long</span>)LINK_MAX);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;LINK_MAX undefined\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _PC_LINK_MAX</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;_PC_LINK_MAX: %ld\n&quot;</span>, (<span class="keyword">long</span>)pathconf(<span class="string">&quot;/&quot;</span>, _PC_LINK_MAX));</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;_PC_LINK_MAX undefined\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ./a.out</span><br><span class="line">ARG_MAX undefined</span><br><span class="line">_SC_ARG_MAX: 2097152</span><br><span class="line">LINK_MAX undefined</span><br><span class="line">_PC_LINK_MAX: 65000</span><br></pre></td></tr></table></figure>
+<h2 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h2><p><code>poll</code>函数与<code>select</code>类似，不过不分成3个fd集合，而合并成一个<code>pollfd</code>结构。<code>event</code>表示关心的事件，例如读、写。<code>revent</code>表示返回的事件，其中除了包含关心的时间外，还包含了fd是否出错、挂断、是否打开一个文件等。</p>
+<p><code>poll</code>同样具有<code>O(n)</code>时间复杂度</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;poll.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">poll</span><span class="params">(struct pollfd *fds, <span class="keyword">nfds_t</span> nfds, <span class="keyword">int</span> timeout)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span>   fd;         <span class="comment">/* file descriptor */</span></span><br><span class="line">    <span class="keyword">short</span> events;     <span class="comment">/* requested events */</span></span><br><span class="line">    <span class="keyword">short</span> revents;    <span class="comment">/* returned events */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h2><p>。。。</p>
+
     </div>
 
     
@@ -248,10 +253,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/apue/thread/" rel="prev" title="线程库pthread（1）">
+                  <i class="fa fa-chevron-left"></i> 线程库pthread（1）
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/apue/post2/" rel="next" title="open openat">
-                  open openat <i class="fa fa-chevron-right"></i>
+                <a href="/apue/ipc/" rel="next" title="进程间通信">
+                  进程间通信 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
