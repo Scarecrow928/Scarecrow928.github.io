@@ -115,16 +115,16 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -167,6 +167,94 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/access/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Scarecrow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="😅">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/apue/access/" class="post-title-link" itemprop="url">access open的区别</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-31 17:47:51" itemprop="dateCreated datePublished" datetime="2021-05-31T17:47:51+08:00">2021-05-31</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-06-27 18:00:26" itemprop="dateModified" datetime="2021-06-27T18:00:26+08:00">2021-06-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/apue/" itemprop="url" rel="index"><span itemprop="name">apue</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="access-open的区别"><a href="#access-open的区别" class="headerlink" title="access open的区别"></a>access open的区别</h1><p>摘自<em>Linux Programmer’s Manual</em>中access函数DESCRIPTION节</p>
+<blockquote>
+<p>The  check is done using the calling process’s <font size=4 color=red><strong>real UID and GID</strong></font>, rather than the effective IDs as is done when<br>actually attempting an operation (e.g., open(2)) on the file.  Similarly, for the root user,  the  check  uses<br>the  set  of permitted capabilities rather than the set of effective capabilities; and for non-root users, the<br>check uses an empty set of capabilities.</p>
+</blockquote>
+<p>可以看到<code>access</code>系统调用在检测进程对文件的访问权限时，使用的是进程实际用户id和组id。而<code>open</code>系统调用使用的是有效id，大部分情况下它们的表现没有区别，而若有效id与实际id不同时，则会出现访问权限区别。</p>
+<p>APUE书中给了一个例子，略作修改后如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span></span></span><br><span class="line"><span class="function"><span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 通过实际id访问文件</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="number">-1</span> == access(<span class="string">&quot;file.txt&quot;</span>, R_OK))</span><br><span class="line">        perror(<span class="string">&quot;access&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;access成功\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过有效id访问文件</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="number">-1</span> == open(<span class="string">&quot;file.txt&quot;</span>, O_RDONLY))</span><br><span class="line">        perror(<span class="string">&quot;open&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;open读成功\n&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在shell中测试它的行为</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编译完成的后的文件为a.out，目录下存在一个file.txt文件用于测试</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$</span> <span class="built_in">ls</span> <span class="literal">-l</span> file.txt</span><br><span class="line"><span class="literal">-r</span>-------- <span class="number">1</span> root root <span class="number">0</span> Jun  <span class="number">1</span>  <span class="number">2021</span> file.txt</span><br><span class="line"><span class="comment"># file.txt文件属于root用户，仅root拥有读权限</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$</span> <span class="built_in">ls</span> <span class="literal">-l</span> a.out</span><br><span class="line"><span class="literal">-rwxr</span><span class="literal">-xr</span><span class="literal">-x</span> <span class="number">1</span> root root <span class="number">16864</span> Jun  <span class="number">1</span>  <span class="number">2021</span> a.out</span><br><span class="line"><span class="comment"># a.out可执行文件属于root用户，所有用户均可执行它</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$</span> ./a.out</span><br><span class="line">access: Permission denied</span><br><span class="line">open: Permission denied</span><br><span class="line"><span class="comment"># 以普通用户身份执行a.out，access open均无法访问file.txt</span></span><br><span class="line"><span class="comment"># 因为此时进程的 有效id、实际id 均为 &quot;scarecrow&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$</span> sudo chmod u+s a.out</span><br><span class="line"><span class="variable">$</span> <span class="built_in">ls</span> <span class="literal">-l</span> a.out</span><br><span class="line"><span class="literal">-rwsr</span><span class="literal">-xr</span><span class="literal">-x</span> <span class="number">1</span> root root <span class="number">16864</span> Jun  <span class="number">1</span>  <span class="number">2021</span> a.out</span><br><span class="line"><span class="comment"># 给a.out设置上&quot;S_ISUID&quot;位，在执行a.out时，有效id会被设置成a.out的所有者，本例中为root</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$</span> ./a.out</span><br><span class="line">access: Permission denied</span><br><span class="line">open读成功</span><br><span class="line"><span class="comment"># access 使用实际id (scarecrow) 访问，依然无法读取</span></span><br><span class="line"><span class="comment"># open 使用有效id (root) 访问，能读取</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/stat/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -198,7 +286,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-26 15:32:30" itemprop="dateModified" datetime="2021-06-26T15:32:30+08:00">2021-06-26</time>
+        <time title="修改时间：2021-06-27 18:00:26" itemprop="dateModified" datetime="2021-06-27T18:00:26+08:00">2021-06-27</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -408,7 +496,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-26 15:32:30" itemprop="dateModified" datetime="2021-06-26T15:32:30+08:00">2021-06-26</time>
+        <time title="修改时间：2021-06-27 18:00:26" itemprop="dateModified" datetime="2021-06-27T18:00:26+08:00">2021-06-27</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -493,7 +581,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-26 15:32:30" itemprop="dateModified" datetime="2021-06-26T15:32:30+08:00">2021-06-26</time>
+        <time title="修改时间：2021-06-27 18:00:26" itemprop="dateModified" datetime="2021-06-27T18:00:26+08:00">2021-06-27</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
