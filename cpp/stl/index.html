@@ -20,23 +20,27 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;scarecrow928.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="😅">
-<meta property="og:url" content="https://scarecrow928.github.io/categories/unp/index.html">
+<meta name="description" content="sort使用的排序算法 数据量大时使用快速排序 数据量小时使用插入排序 递归层数很深时使用堆排序。递归层数深可能时随机分区不规律引起的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL相关">
+<meta property="og:url" content="https://scarecrow928.github.io/cpp/stl/index.html">
 <meta property="og:site_name" content="😅">
+<meta property="og:description" content="sort使用的排序算法 数据量大时使用快速排序 数据量小时使用插入排序 递归层数很深时使用堆排序。递归层数深可能时随机分区不规律引起的。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-29T23:12:35.000Z">
+<meta property="article:modified_time" content="2021-07-30T07:32:04.206Z">
 <meta property="article:author" content="Scarecrow">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://scarecrow928.github.io/categories/unp/">
+<link rel="canonical" href="https://scarecrow928.github.io/cpp/stl/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:false,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:&quot;&quot;,&quot;permalink&quot;:&quot;&quot;,&quot;path&quot;:&quot;categories&#x2F;unp&#x2F;index.html&quot;,&quot;title&quot;:&quot;&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;scarecrow928.github.io&#x2F;cpp&#x2F;stl&#x2F;&quot;,&quot;path&quot;:&quot;cpp&#x2F;stl&#x2F;&quot;,&quot;title&quot;:&quot;STL相关&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>分类: unp | 😅</title><script src="/js/config.js"></script>
+<title>STL相关 | 😅</title><script src="/js/config.js"></script>
   
 
 
@@ -90,7 +94,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -103,6 +107,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#sort%E4%BD%BF%E7%94%A8%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">sort使用的排序算法</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -157,50 +162,88 @@
 </noscript>
 
 
-    <div class="main-inner category posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h2 class="collection-header">unp
-          <small>分类</small>
-        </h2>
-      </div>
 
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/cpp/stl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Scarecrow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="😅">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          STL相关
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+
+      <time title="创建时间：2021-07-30 07:12:35 / 修改时间：15:32:04" itemprop="dateCreated datePublished" datetime="2021-07-30T07:12:35+08:00">2021-07-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="sort使用的排序算法"><a href="#sort使用的排序算法" class="headerlink" title="sort使用的排序算法"></a><code>sort</code>使用的排序算法</h2><ul>
+<li>数据量大时使用快速排序</li>
+<li>数据量小时使用插入排序</li>
+<li>递归层数很深时使用堆排序。递归层数深可能时随机分区不规律引起的。</li>
+</ul>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-06-27T07:12:22+08:00"
-              content="2021-06-27">
-          06-27
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/unp/tcp/" itemprop="url">
-            <span itemprop="name">TCP协议</span>
-          </a>
-      </div>
+    <footer class="post-footer">
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/cpp/new/" rel="prev" title="new运算符">
+                  <i class="fa fa-chevron-left"></i> new运算符
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
+
 <script src="/js/comments.js"></script>
 </div>
   </main>

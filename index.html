@@ -115,16 +115,16 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -167,6 +167,163 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/cpp/stl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Scarecrow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="😅">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/cpp/stl/" class="post-title-link" itemprop="url">STL相关</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-07-30 07:12:35 / 修改时间：15:32:04" itemprop="dateCreated datePublished" datetime="2021-07-30T07:12:35+08:00">2021-07-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="sort使用的排序算法"><a href="#sort使用的排序算法" class="headerlink" title="sort使用的排序算法"></a><code>sort</code>使用的排序算法</h2><ul>
+<li>数据量大时使用快速排序</li>
+<li>数据量小时使用插入排序</li>
+<li>递归层数很深时使用堆排序。递归层数深可能时随机分区不规律引起的。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/cpp/new/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Scarecrow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="😅">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/cpp/new/" class="post-title-link" itemprop="url">new运算符</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-07-01 08:11:35" itemprop="dateCreated datePublished" datetime="2021-07-01T08:11:35+08:00">2021-07-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-07-30 15:32:04" itemprop="dateModified" datetime="2021-07-30T15:32:04+08:00">2021-07-30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cpp/" itemprop="url" rel="index"><span itemprop="name">cpp</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="运行原理"><a href="#运行原理" class="headerlink" title="运行原理"></a>运行原理</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A *p = <span class="keyword">new</span> <span class="built_in">A</span>();</span><br><span class="line"><span class="keyword">delete</span> p;</span><br></pre></td></tr></table></figure>
+<p>调用顺序：</p>
+<ol>
+<li><code>operator new</code>申请空间，一般STL实现中<code>new</code>申请堆内存，可重载为自定义的空间</li>
+<li>调用A的<code>constructor A()</code>，初始化内存</li>
+<li>调用A的<code>deconstructor ~A()</code>，析构内存</li>
+<li><code>operator delete</code>释放由<code>new</code>申请的空间</li>
+</ol>
+<h2 id="new与malloc"><a href="#new与malloc" class="headerlink" title="new与malloc()"></a><code>new</code>与<code>malloc()</code></h2><a href="/apue/malloc/" title="[区别]">[区别]</a>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/unp/tcp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -190,10 +347,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-06-27 07:12:22 / 修改时间：18:00:26" itemprop="dateCreated datePublished" datetime="2021-06-27T07:12:22+08:00">2021-06-27</time>
+      <time title="创建时间：2021-06-27 07:12:22" itemprop="dateCreated datePublished" datetime="2021-06-27T07:12:22+08:00">2021-06-27</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-07-30 15:32:04" itemprop="dateModified" datetime="2021-07-30T15:32:04+08:00">2021-07-30</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -305,7 +468,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-27 18:00:26" itemprop="dateModified" datetime="2021-06-27T18:00:26+08:00">2021-06-27</time>
+        <time title="修改时间：2021-07-30 15:32:04" itemprop="dateModified" datetime="2021-07-30T15:32:04+08:00">2021-07-30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -412,7 +575,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-27 18:00:26" itemprop="dateModified" datetime="2021-06-27T18:00:26+08:00">2021-06-27</time>
+        <time title="修改时间：2021-07-30 15:32:04" itemprop="dateModified" datetime="2021-07-30T15:32:04+08:00">2021-07-30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -442,8 +605,6 @@
 <h2 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h2><p><code>poll</code>函数与<code>select</code>类似，不过不分成3个fd集合，而合并成一个<code>pollfd</code>结构。<code>event</code>表示关心的事件，例如读、写。<code>revent</code>表示返回的事件，其中除了包含关心的时间外，还包含了fd是否出错、挂断、是否打开一个文件等。</p>
 <p><code>poll</code>同样具有<code>O(n)</code>时间复杂度</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;poll.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">poll</span><span class="params">(struct pollfd *fds, <span class="keyword">nfds_t</span> nfds, <span class="keyword">int</span> timeout)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span>   fd;         <span class="comment">/* file descriptor */</span></span><br><span class="line">    <span class="keyword">short</span> events;     <span class="comment">/* requested events */</span></span><br><span class="line">    <span class="keyword">short</span> revents;    <span class="comment">/* returned events */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h2><p>。。。</p>
 
       
     </div>
@@ -501,7 +662,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-27 18:00:26" itemprop="dateModified" datetime="2021-06-27T18:00:26+08:00">2021-06-27</time>
+        <time title="修改时间：2021-07-30 15:32:04" itemprop="dateModified" datetime="2021-07-30T15:32:04+08:00">2021-07-30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -612,7 +773,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-27 18:00:26" itemprop="dateModified" datetime="2021-06-27T18:00:26+08:00">2021-06-27</time>
+        <time title="修改时间：2021-07-30 15:32:04" itemprop="dateModified" datetime="2021-07-30T15:32:04+08:00">2021-07-30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -704,7 +865,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-27 18:00:26" itemprop="dateModified" datetime="2021-06-27T18:00:26+08:00">2021-06-27</time>
+        <time title="修改时间：2021-07-30 15:32:04" itemprop="dateModified" datetime="2021-07-30T15:32:04+08:00">2021-07-30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -831,7 +992,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-27 18:00:26" itemprop="dateModified" datetime="2021-06-27T18:00:26+08:00">2021-06-27</time>
+        <time title="修改时间：2021-07-30 15:32:04" itemprop="dateModified" datetime="2021-07-30T15:32:04+08:00">2021-07-30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -924,7 +1085,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-27 18:00:26" itemprop="dateModified" datetime="2021-06-27T18:00:26+08:00">2021-06-27</time>
+        <time title="修改时间：2021-07-30 15:32:04" itemprop="dateModified" datetime="2021-07-30T15:32:04+08:00">2021-07-30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -961,200 +1122,6 @@
 <li><code>malloc</code>直接在堆上分配内存，<code>new</code>则在自由存储区上分配。大部分编译器用堆实现自由存储区。堆是操作系统维护的内存区域，而自由存储区是C++概念</li>
 </ol>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/segment/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Scarecrow">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="😅">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/apue/segment/" class="post-title-link" itemprop="url">C程序中的存储空间布局</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-06-05 08:19:32" itemprop="dateCreated datePublished" datetime="2021-06-05T08:19:32+08:00">2021-06-05</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-27 18:00:26" itemprop="dateModified" datetime="2021-06-27T18:00:26+08:00">2021-06-27</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/apue/" itemprop="url" rel="index"><span itemprop="name">apue</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="C程序中的存储空间布局"><a href="#C程序中的存储空间布局" class="headerlink" title="C程序中的存储空间布局"></a>C程序中的存储空间布局</h1><p>从内存高地址到低地址，可分为：</p>
-<ul>
-<li>栈</li>
-<li>堆</li>
-<li>未初始化数据段</li>
-<li>初始化数据段</li>
-<li>正文段</li>
-</ul>
-<h2 id="正文段"><a href="#正文段" class="headerlink" title="正文段"></a>正文段</h2><ol>
-<li>主要内容为机器指令</li>
-<li>只读</li>
-<li>只需要一个副本，多次执行共享</li>
-</ol>
-<h2 id="初始化数据段"><a href="#初始化数据段" class="headerlink" title="初始化数据段"></a>初始化数据段</h2><ol>
-<li>全局变量</li>
-<li>内核在程序开始执行之前从文件读取值为其初始化</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="未初始化数据段（Block-Started-by-Symbol-BSS）"><a href="#未初始化数据段（Block-Started-by-Symbol-BSS）" class="headerlink" title="未初始化数据段（Block Started by Symbol, BSS）"></a>未初始化数据段（Block Started by Symbol, BSS）</h2><ol>
-<li>全局变量</li>
-<li>内核在程序开始执行之前将其初始化为<code>0</code>或<code>NULL</code><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">100</span>];</span><br></pre></td></tr></table></figure>
-注意指针<code>a</code>是已初始化的，而<code>a</code>数组的内容是未初始化的，一般内核将<code>a</code>数组内容置为全<code>0</code></li>
-</ol>
-<h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><ol>
-<li>动态内存分配的变量</li>
-</ol>
-<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><ol>
-<li>局部变量</li>
-<li>函数调用时保存的上下文</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/link/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Scarecrow">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="😅">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/apue/link/" class="post-title-link" itemprop="url">软链接与硬链接的区别</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-06-03 03:21:35" itemprop="dateCreated datePublished" datetime="2021-06-03T03:21:35+08:00">2021-06-03</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-27 18:00:26" itemprop="dateModified" datetime="2021-06-27T18:00:26+08:00">2021-06-27</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/apue/" itemprop="url" rel="index"><span itemprop="name">apue</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>软链接中的实际内容为指向文件的路径，而硬链接中包含原始文件的索引节点（inode）。也就是：软链接的inode与原始文件不同，而硬链接的inode与原始文件相同。</p>
-<p>当访问软链接时，需要通过文件中的路径来访问原始文件，而硬链接直接通过inode访问即可。</p>
-<p>在删除原始文件后，其硬链接链接计数器会减1，若减至0则删除文件数据块。软链接中指向路径不会发生变化，而原始文件路径已经不存在了，所以再次访问软链接会报错<code>No such file or directory</code>，而硬链接因为在创建时，向原始文件的硬链接计数器<code>st_nlink</code>加1了，因此删除原始文件也只是使其减1，并没有删除数据块，硬链接仍然能访问原始数据块。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stat</span> &#123;</span></span><br><span class="line">    <span class="keyword">dev_t</span>     st_dev;         <span class="comment">/* ID of device containing file */</span></span><br><span class="line">    <span class="keyword">ino_t</span>     st_ino;         <span class="comment">/* Inode number */</span></span><br><span class="line">    <span class="keyword">mode_t</span>    st_mode;        <span class="comment">/* File type and mode */</span></span><br><span class="line">    <span class="keyword">nlink_t</span>   st_nlink;       <span class="comment">/* Number of hard links 硬链接计数器在这里 */</span> </span><br><span class="line">    <span class="keyword">uid_t</span>     st_uid;         <span class="comment">/* User ID of owner */</span></span><br><span class="line">    <span class="keyword">gid_t</span>     st_gid;         <span class="comment">/* Group ID of owner */</span></span><br><span class="line">    <span class="keyword">dev_t</span>     st_rdev;        <span class="comment">/* Device ID (if special file) */</span></span><br><span class="line">    <span class="keyword">off_t</span>     st_size;        <span class="comment">/* Total size, in bytes */</span></span><br><span class="line">    <span class="keyword">blksize_t</span> st_blksize;     <span class="comment">/* Block size for filesystem I/O */</span></span><br><span class="line">    <span class="keyword">blkcnt_t</span>  st_blocks;      <span class="comment">/* Number of 512B blocks allocated */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timespec</span> <span class="title">st_atim</span>;</span>  <span class="comment">/* Time of last access */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timespec</span> <span class="title">st_mtim</span>;</span>  <span class="comment">/* Time of last modification */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timespec</span> <span class="title">st_ctim</span>;</span>  <span class="comment">/* Time of last status change */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>在shell中测试删除效果</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> <span class="built_in">echo</span> <span class="string">&quot;something&quot;</span> &gt; <span class="keyword">data</span></span><br><span class="line"><span class="variable">$</span> ln <span class="keyword">data</span> hardlink_data <span class="comment"># 硬链接</span></span><br><span class="line"><span class="variable">$</span> ln <span class="literal">-s</span> <span class="keyword">data</span> softlink_data <span class="comment"># 软链接</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># data的inode值与hardlink_data值相同，links = 2</span></span><br><span class="line"><span class="variable">$</span> stat <span class="keyword">data</span></span><br><span class="line">  File: <span class="keyword">data</span></span><br><span class="line">  Size: <span class="number">10</span>              Blocks: <span class="number">8</span>          IO Block: <span class="number">4096</span>   regular file</span><br><span class="line">Device: <span class="number">830</span><span class="built_in">h</span>/<span class="number">2096</span>d      Inode: <span class="number">11481</span>       Links: <span class="number">2</span></span><br><span class="line">Access: (<span class="number">0644</span>/<span class="literal">-rw</span><span class="literal">-r</span>-<span class="literal">-r</span>--)  Uid: ( <span class="number">1000</span>/scarecrow)   Gid: ( <span class="number">1000</span>/scarecrow)</span><br><span class="line">Access: <span class="number">2021</span><span class="literal">-06</span><span class="literal">-03</span> <span class="number">11</span>:<span class="number">41</span>:<span class="number">38.998538700</span> +<span class="number">0800</span></span><br><span class="line">Modify: <span class="number">2021</span><span class="literal">-06</span><span class="literal">-03</span> <span class="number">11</span>:<span class="number">41</span>:<span class="number">38.998538700</span> +<span class="number">0800</span></span><br><span class="line">Change: <span class="number">2021</span><span class="literal">-06</span><span class="literal">-03</span> <span class="number">11</span>:<span class="number">42</span>:<span class="number">27.628538700</span> +<span class="number">0800</span></span><br><span class="line"> Birth: -</span><br><span class="line"><span class="variable">$</span> stat hardlink_data</span><br><span class="line">  File: hardlink_data</span><br><span class="line">  Size: <span class="number">10</span>              Blocks: <span class="number">8</span>          IO Block: <span class="number">4096</span>   regular file</span><br><span class="line">Device: <span class="number">830</span><span class="built_in">h</span>/<span class="number">2096</span>d      Inode: <span class="number">11481</span>       Links: <span class="number">2</span></span><br><span class="line">Access: (<span class="number">0644</span>/<span class="literal">-rw</span><span class="literal">-r</span>-<span class="literal">-r</span>--)  Uid: ( <span class="number">1000</span>/scarecrow)   Gid: ( <span class="number">1000</span>/scarecrow)</span><br><span class="line">Access: <span class="number">2021</span><span class="literal">-06</span><span class="literal">-03</span> <span class="number">11</span>:<span class="number">41</span>:<span class="number">38.998538700</span> +<span class="number">0800</span></span><br><span class="line">Modify: <span class="number">2021</span><span class="literal">-06</span><span class="literal">-03</span> <span class="number">11</span>:<span class="number">41</span>:<span class="number">38.998538700</span> +<span class="number">0800</span></span><br><span class="line">Change: <span class="number">2021</span><span class="literal">-06</span><span class="literal">-03</span> <span class="number">11</span>:<span class="number">42</span>:<span class="number">27.628538700</span> +<span class="number">0800</span></span><br><span class="line"> Birth: -</span><br><span class="line"></span><br><span class="line"> <span class="comment"># softlink_data的inode值与data不同</span></span><br><span class="line"> <span class="variable">$</span> stat softlink_data</span><br><span class="line">  File: softlink_data -&gt; <span class="keyword">data</span></span><br><span class="line">  Size: <span class="number">4</span>               Blocks: <span class="number">0</span>          IO Block: <span class="number">4096</span>   symbolic link</span><br><span class="line">Device: <span class="number">830</span><span class="built_in">h</span>/<span class="number">2096</span>d      Inode: <span class="number">42305</span>       Links: <span class="number">1</span></span><br><span class="line">Access: (<span class="number">0777</span>/lrwxrwxrwx)  Uid: ( <span class="number">1000</span>/scarecrow)   Gid: ( <span class="number">1000</span>/scarecrow)</span><br><span class="line">Access: <span class="number">2021</span><span class="literal">-06</span><span class="literal">-03</span> <span class="number">11</span>:<span class="number">42</span>:<span class="number">59.968538700</span> +<span class="number">0800</span></span><br><span class="line">Modify: <span class="number">2021</span><span class="literal">-06</span><span class="literal">-03</span> <span class="number">11</span>:<span class="number">42</span>:<span class="number">42.768538700</span> +<span class="number">0800</span></span><br><span class="line">Change: <span class="number">2021</span><span class="literal">-06</span><span class="literal">-03</span> <span class="number">11</span>:<span class="number">42</span>:<span class="number">42.768538700</span> +<span class="number">0800</span></span><br><span class="line"> Birth: -</span><br><span class="line"></span><br><span class="line"> <span class="variable">$</span> <span class="built_in">rm</span> <span class="keyword">data</span></span><br><span class="line"> <span class="variable">$</span> <span class="built_in">cat</span> softlink_data</span><br><span class="line"><span class="built_in">cat</span>: softlink_data: No such file or directory</span><br><span class="line"><span class="variable">$</span> <span class="built_in">cat</span> hardlink_data</span><br><span class="line">something</span><br><span class="line"></span><br><span class="line"><span class="comment"># links 减至1了</span></span><br><span class="line"><span class="variable">$</span> stat hardlink_data</span><br><span class="line">  File: hardlink_data</span><br><span class="line">  Size: <span class="number">10</span>              Blocks: <span class="number">8</span>          IO Block: <span class="number">4096</span>   regular file</span><br><span class="line">Device: <span class="number">830</span><span class="built_in">h</span>/<span class="number">2096</span>d      Inode: <span class="number">11481</span>       Links: <span class="number">1</span></span><br><span class="line">Access: (<span class="number">0644</span>/<span class="literal">-rw</span><span class="literal">-r</span>-<span class="literal">-r</span>--)  Uid: ( <span class="number">1000</span>/scarecrow)   Gid: ( <span class="number">1000</span>/scarecrow)</span><br><span class="line">Access: <span class="number">2021</span><span class="literal">-06</span><span class="literal">-03</span> <span class="number">11</span>:<span class="number">47</span>:<span class="number">07.268538700</span> +<span class="number">0800</span></span><br><span class="line">Modify: <span class="number">2021</span><span class="literal">-06</span><span class="literal">-03</span> <span class="number">11</span>:<span class="number">41</span>:<span class="number">38.998538700</span> +<span class="number">0800</span></span><br><span class="line">Change: <span class="number">2021</span><span class="literal">-06</span><span class="literal">-03</span> <span class="number">11</span>:<span class="number">46</span>:<span class="number">50.228538700</span> +<span class="number">0800</span></span><br><span class="line"> Birth: -</span><br></pre></td></tr></table></figure>
       
     </div>
 
