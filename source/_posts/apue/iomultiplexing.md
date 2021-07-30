@@ -31,6 +31,3 @@ struct pollfd {
     short revents;    /* returned events */
 };
 ```
-
-## epoll
-。。。
