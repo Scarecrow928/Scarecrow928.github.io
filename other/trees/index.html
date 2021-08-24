@@ -20,28 +20,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;scarecrow928.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta name="description" content="C程序中的存储空间布局从内存高地址到低地址，可分为：  栈 堆 未初始化数据段 初始化数据段 正文段  正文段 主要内容为机器指令 只读 只需要一个副本，多次执行共享  初始化数据段 全局变量 内核在程序开始执行之前从文件读取值为其初始化  1int a &#x3D; 5;  未初始化数据段（Block Started by Symbol, BSS） 全局变量 内核在程序开始执行之前将其初始化为0或NULL">
+<meta name="description" content="平衡二叉树性质：  每个节点最多有2个子节点 左右子树高度差不超过1 当前节点值大于左孩子，小于右孩子  缺陷：每次插入、删除都需要大量的左旋右旋操作 红黑树红黑树弥补了平衡二叉树插入删除的问题 性质：  根节点为黑色 红节点的子节点必为黑色 从根节点到任意一个节点，包含相同数目的黑色节点  STL中红黑树（map, set）的迭代器实现：  第一个节点是树中最小的节点 如果存在右子树，则下一个节">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C程序中的存储空间布局">
-<meta property="og:url" content="https://scarecrow928.github.io/apue/segment/index.html">
+<meta property="og:title" content="平衡二叉树、红黑树、B+树比较">
+<meta property="og:url" content="https://scarecrow928.github.io/other/trees/index.html">
 <meta property="og:site_name" content="👍">
-<meta property="og:description" content="C程序中的存储空间布局从内存高地址到低地址，可分为：  栈 堆 未初始化数据段 初始化数据段 正文段  正文段 主要内容为机器指令 只读 只需要一个副本，多次执行共享  初始化数据段 全局变量 内核在程序开始执行之前从文件读取值为其初始化  1int a &#x3D; 5;  未初始化数据段（Block Started by Symbol, BSS） 全局变量 内核在程序开始执行之前将其初始化为0或NULL">
+<meta property="og:description" content="平衡二叉树性质：  每个节点最多有2个子节点 左右子树高度差不超过1 当前节点值大于左孩子，小于右孩子  缺陷：每次插入、删除都需要大量的左旋右旋操作 红黑树红黑树弥补了平衡二叉树插入删除的问题 性质：  根节点为黑色 红节点的子节点必为黑色 从根节点到任意一个节点，包含相同数目的黑色节点  STL中红黑树（map, set）的迭代器实现：  第一个节点是树中最小的节点 如果存在右子树，则下一个节">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-06-05T00:19:32.000Z">
+<meta property="article:published_time" content="2021-08-24T00:42:52.000Z">
 <meta property="article:modified_time" content="2021-08-24T11:58:35.485Z">
 <meta property="article:author" content="Scarecrow">
-<meta property="article:tag" content="unix">
+<meta property="article:tag" content="rb_tree">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://scarecrow928.github.io/apue/segment/">
+<link rel="canonical" href="https://scarecrow928.github.io/other/trees/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;scarecrow928.github.io&#x2F;apue&#x2F;segment&#x2F;&quot;,&quot;path&quot;:&quot;apue&#x2F;segment&#x2F;&quot;,&quot;title&quot;:&quot;C程序中的存储空间布局&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;scarecrow928.github.io&#x2F;other&#x2F;trees&#x2F;&quot;,&quot;path&quot;:&quot;other&#x2F;trees&#x2F;&quot;,&quot;title&quot;:&quot;平衡二叉树、红黑树、B+树比较&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>C程序中的存储空间布局 | 👍</title><script src="/js/config.js"></script>
+<title>平衡二叉树、红黑树、B+树比较 | 👍</title><script src="/js/config.js"></script>
   
 
 
@@ -108,7 +108,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%9A%84%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E5%B8%83%E5%B1%80"><span class="nav-number">1.</span> <span class="nav-text">C程序中的存储空间布局</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E6%96%87%E6%AE%B5"><span class="nav-number">1.1.</span> <span class="nav-text">正文段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE%E6%AE%B5"><span class="nav-number">1.2.</span> <span class="nav-text">初始化数据段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE%E6%AE%B5%EF%BC%88Block-Started-by-Symbol-BSS%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">未初始化数据段（Block Started by Symbol, BSS）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86"><span class="nav-number">1.4.</span> <span class="nav-text">堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%88"><span class="nav-number">1.5.</span> <span class="nav-text">栈</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">1.</span> <span class="nav-text">平衡二叉树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-number">2.</span> <span class="nav-text">红黑树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B%E6%A0%91%E4%B8%8EB-%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">B树与B+树</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -174,7 +174,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/segment/">
+    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/other/trees/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -187,7 +187,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          C程序中的存储空间布局
+          平衡二叉树、红黑树、B+树比较
         </h1>
 
         <div class="post-meta-container">
@@ -197,24 +197,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2021-06-05 08:19:32" itemprop="dateCreated datePublished" datetime="2021-06-05T08:19:32+08:00">2021-06-05</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-24 19:58:35" itemprop="dateModified" datetime="2021-08-24T19:58:35+08:00">2021-08-24</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/apue/" itemprop="url" rel="index"><span itemprop="name">apue</span></a>
-        </span>
+      <time title="创建时间：2021-08-24 08:42:52 / 修改时间：19:58:35" itemprop="dateCreated datePublished" datetime="2021-08-24T08:42:52+08:00">2021-08-24</time>
     </span>
 
   
@@ -227,37 +212,35 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="C程序中的存储空间布局"><a href="#C程序中的存储空间布局" class="headerlink" title="C程序中的存储空间布局"></a>C程序中的存储空间布局</h1><p>从内存高地址到低地址，可分为：</p>
+        <h1 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h1><p>性质：</p>
 <ul>
-<li>栈</li>
-<li>堆</li>
-<li>未初始化数据段</li>
-<li>初始化数据段</li>
-<li>正文段</li>
+<li>每个节点最多有2个子节点</li>
+<li>左右子树高度差不超过1</li>
+<li>当前节点值大于左孩子，小于右孩子</li>
 </ul>
-<h2 id="正文段"><a href="#正文段" class="headerlink" title="正文段"></a>正文段</h2><ol>
-<li>主要内容为机器指令</li>
-<li>只读</li>
-<li>只需要一个副本，多次执行共享</li>
+<p>缺陷：每次插入、删除都需要大量的左旋右旋操作</p>
+<h1 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h1><p>红黑树弥补了平衡二叉树插入删除的问题</p>
+<p>性质：</p>
+<ul>
+<li>根节点为黑色</li>
+<li>红节点的子节点必为黑色</li>
+<li>从根节点到任意一个节点，包含相同数目的黑色节点</li>
+</ul>
+<p>STL中红黑树（<code>map, set</code>）的迭代器实现：</p>
+<ol>
+<li>第一个节点是树中最小的节点</li>
+<li>如果存在右子树，则下一个节点是右子树的最小节点</li>
+<li>如果不存在右子树，则向上寻找。找到一个节点其右节点未被遍历过，则这个节点是下一个节点，找不到意味着完成遍历</li>
 </ol>
-<h2 id="初始化数据段"><a href="#初始化数据段" class="headerlink" title="初始化数据段"></a>初始化数据段</h2><ol>
-<li>全局变量</li>
-<li>内核在程序开始执行之前从文件读取值为其初始化</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="未初始化数据段（Block-Started-by-Symbol-BSS）"><a href="#未初始化数据段（Block-Started-by-Symbol-BSS）" class="headerlink" title="未初始化数据段（Block Started by Symbol, BSS）"></a>未初始化数据段（Block Started by Symbol, BSS）</h2><ol>
-<li>全局变量</li>
-<li>内核在程序开始执行之前将其初始化为<code>0</code>或<code>NULL</code><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">100</span>];</span><br></pre></td></tr></table></figure>
-注意指针<code>a</code>是已初始化的，而<code>a</code>数组的内容是未初始化的，一般内核将<code>a</code>数组内容置为全<code>0</code></li>
-</ol>
-<h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><ol>
-<li>动态内存分配的变量</li>
-</ol>
-<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><ol>
-<li>局部变量</li>
-<li>函数调用时保存的上下文</li>
-</ol>
+<p>整体过程类似中序遍历</p>
+<h1 id="B树与B-树"><a href="#B树与B-树" class="headerlink" title="B树与B+树"></a>B树与B+树</h1><p>B树是一种多路查找树，节点中有多个key，表示子节点值的区间。插入与删除时，会改变节点中key的数目</p>
+<p>B+树：</p>
+<ul>
+<li>只有叶子节点包含数据</li>
+<li>每个非叶子节点的key数目相同，插入删除时不改变非叶子节点数目</li>
+<li>叶子节点用一个链表串起来，方便快速遍历</li>
+</ul>
+<p>与红黑树比较：B树/B+树时多叉的，查询时间复杂度都为<code>O(logn)</code>，不过当数据块在磁盘上时，B+树的磁盘IO数目更少，应为用链表串起来了</p>
 
     </div>
 
@@ -267,20 +250,20 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/unix/" rel="tag"># unix</a>
+              <a href="/tags/rb-tree/" rel="tag"># rb_tree</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/apue/link/" rel="prev" title="软链接与硬链接的区别">
-                  <i class="fa fa-chevron-left"></i> 软链接与硬链接的区别
+                <a href="/other/os/" rel="prev" title="操作系统相关">
+                  <i class="fa fa-chevron-left"></i> 操作系统相关
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/apue/malloc/" rel="next" title="malloc calloc realloc">
-                  malloc calloc realloc <i class="fa fa-chevron-right"></i>
+                <a href="/cpp/rvalue/" rel="next" title="右值，std::move()">
+                  右值，std::move() <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
