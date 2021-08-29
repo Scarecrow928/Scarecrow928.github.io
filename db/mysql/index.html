@@ -20,23 +20,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;scarecrow928.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="👍">
-<meta property="og:url" content="https://scarecrow928.github.io/archives/2021/06/index.html">
+<meta name="description" content="事务事务是一系列操作组成的逻辑工作单位，事务中的操作只能全部成功或全部失败。 ACID事务有4个特征  Atomicity：原子性，事务中的操作要么全部成功，要么全部失败且不更新数据 Consistency：一致性，数据库状态从一个状态转换到另一个状态 Isolation：隔离性，在处理数据时一个事务不能被其他事务干扰，不同事务之间并发运行互不影响 Durability：事务一旦完成，对数据库的影">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql">
+<meta property="og:url" content="https://scarecrow928.github.io/db/mysql/index.html">
 <meta property="og:site_name" content="👍">
+<meta property="og:description" content="事务事务是一系列操作组成的逻辑工作单位，事务中的操作只能全部成功或全部失败。 ACID事务有4个特征  Atomicity：原子性，事务中的操作要么全部成功，要么全部失败且不更新数据 Consistency：一致性，数据库状态从一个状态转换到另一个状态 Isolation：隔离性，在处理数据时一个事务不能被其他事务干扰，不同事务之间并发运行互不影响 Durability：事务一旦完成，对数据库的影">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-29T04:48:01.000Z">
+<meta property="article:modified_time" content="2021-08-29T13:03:38.474Z">
 <meta property="article:author" content="Scarecrow">
+<meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://scarecrow928.github.io/archives/2021/06/">
+<link rel="canonical" href="https://scarecrow928.github.io/db/mysql/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:false,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:&quot;&quot;,&quot;permalink&quot;:&quot;&quot;,&quot;path&quot;:&quot;archives&#x2F;2021&#x2F;06&#x2F;index.html&quot;,&quot;title&quot;:&quot;&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;scarecrow928.github.io&#x2F;db&#x2F;mysql&#x2F;&quot;,&quot;path&quot;:&quot;db&#x2F;mysql&#x2F;&quot;,&quot;title&quot;:&quot;mysql&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>归档 | 👍</title><script src="/js/config.js"></script>
+<title>mysql | 👍</title><script src="/js/config.js"></script>
   
 
 
@@ -90,7 +95,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -103,6 +108,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACID"><span class="nav-number">2.</span> <span class="nav-text">ACID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%95%E6%93%8E"><span class="nav-number">3.</span> <span class="nav-text">数据库引擎</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -157,229 +163,120 @@
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 20 篇日志。 继续努力。</span>
-      </div>
 
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/db/mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Scarecrow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="👍">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mysql
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+
+      <time title="创建时间：2021-08-29 12:48:01 / 修改时间：21:03:38" itemprop="dateCreated datePublished" datetime="2021-08-29T12:48:01+08:00">2021-08-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/db/" itemprop="url" rel="index"><span itemprop="name">db</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>事务是一系列操作组成的逻辑工作单位，事务中的操作只能全部成功或全部失败。</p>
+<h2 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h2><p>事务有4个特征</p>
+<ul>
+<li>Atomicity：原子性，事务中的操作要么全部成功，要么全部失败且不更新数据</li>
+<li>Consistency：一致性，数据库状态从一个状态转换到另一个状态</li>
+<li>Isolation：隔离性，在处理数据时一个事务不能被其他事务干扰，不同事务之间并发运行互不影响</li>
+<li>Durability：事务一旦完成，对数据库的影响是永久的，即使数据库故障也不会丢失数据</li>
+</ul>
+<h2 id="数据库引擎"><a href="#数据库引擎" class="headerlink" title="数据库引擎"></a>数据库引擎</h2><ol>
+<li>InnoDB</li>
+</ol>
+<ul>
+<li>支持事务，满足ACID</li>
+<li>支持行级锁</li>
+<li>只有InnoDB支持Foreign key</li>
+<li>并发性能高</li>
+<li>B+树作为索引</li>
+<li>不保存行数</li>
+</ul>
+<ol start="2">
+<li>Mylsam</li>
+</ol>
+<ul>
+<li>查询快</li>
+</ul>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-06-27T07:12:22+08:00"
-              content="2021-06-27">
-          06-27
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/unp/tcp/" itemprop="url">
-            <span itemprop="name">TCP协议</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/mysql/" rel="tag"># mysql</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/cpp/rvalue/" rel="prev" title="右值，std::move()">
+                  <i class="fa fa-chevron-left"></i> 右值，std::move()
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-06-23T08:24:05+08:00"
-              content="2021-06-23">
-          06-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/apue/ipc/" itemprop="url">
-            <span itemprop="name">进程间通信</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-06-21T11:04:24+08:00"
-              content="2021-06-21">
-          06-21
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/apue/iomultiplexing/" itemprop="url">
-            <span itemprop="name">IO多路复用</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-06-16T11:42:45+08:00"
-              content="2021-06-16">
-          06-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/apue/thread/" itemprop="url">
-            <span itemprop="name">线程库pthread（1）</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-06-15T12:22:09+08:00"
-              content="2021-06-15">
-          06-15
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/apue/signal2/" itemprop="url">
-            <span itemprop="name">信号机制（2）</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-06-12T08:53:49+08:00"
-              content="2021-06-12">
-          06-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/apue/signal/" itemprop="url">
-            <span itemprop="name">信号机制（1）</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-06-09T03:34:58+08:00"
-              content="2021-06-09">
-          06-09
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/apue/fork/" itemprop="url">
-            <span itemprop="name">fork exec</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-06-08T06:48:38+08:00"
-              content="2021-06-08">
-          06-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/apue/malloc/" itemprop="url">
-            <span itemprop="name">malloc calloc realloc</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-06-05T08:19:32+08:00"
-              content="2021-06-05">
-          06-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/apue/segment/" itemprop="url">
-            <span itemprop="name">C程序中的存储空间布局</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-06-03T03:21:35+08:00"
-              content="2021-06-03">
-          06-03
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/apue/link/" itemprop="url">
-            <span itemprop="name">软链接与硬链接的区别</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
 <script src="/js/comments.js"></script>
 </div>
   </main>

@@ -115,16 +115,16 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -167,6 +167,98 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/signal2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Scarecrow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="👍">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/apue/signal2/" class="post-title-link" itemprop="url">信号机制（2）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-15 12:22:09" itemprop="dateCreated datePublished" datetime="2021-06-15T12:22:09+08:00">2021-06-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-08-29 21:03:38" itemprop="dateModified" datetime="2021-08-29T21:03:38+08:00">2021-08-29</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/apue/" itemprop="url" rel="index"><span itemprop="name">apue</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="可重入函数"><a href="#可重入函数" class="headerlink" title="可重入函数"></a>可重入函数</h1><p>某些库函数中调用了<code>malloc</code>等函数，若在其调用期间被信号中断，可能引起内存分配错误。</p>
+<p>可重入函数是异步信号安全的，它们调用时会阻塞信号，不会引起因信号产生的安全问题。</p>
+<h1 id="signal相关函数"><a href="#signal相关函数" class="headerlink" title="signal相关函数"></a>signal相关函数</h1><h2 id="sigaction"><a href="#sigaction" class="headerlink" title="sigaction"></a>sigaction</h2><p>检查、修改某个信号的动作，<code>act</code>为新动作，可为<code>NULL</code>；<code>oldact</code>为已存在动作</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sigaction</span><span class="params">(<span class="keyword">int</span> signum, <span class="keyword">const</span> struct sigaction *act,</span></span></span><br><span class="line"><span class="params"><span class="function">                struct sigaction *oldact)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sigaction</span> &#123;</span></span><br><span class="line">    <span class="keyword">void</span>     (*sa_handler)(<span class="keyword">int</span>);</span><br><span class="line">    <span class="keyword">void</span>     (*sa_sigaction)(<span class="keyword">int</span>, <span class="keyword">siginfo_t</span> *, <span class="keyword">void</span> *);</span><br><span class="line">    <span class="keyword">sigset_t</span>   sa_mask;</span><br><span class="line">    <span class="keyword">int</span>        sa_flags;</span><br><span class="line">    <span class="keyword">void</span>     (*sa_restorer)(<span class="keyword">void</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="setjmp-longjmp-与-sigsetjmp-siglongjmp"><a href="#setjmp-longjmp-与-sigsetjmp-siglongjmp" class="headerlink" title="setjmp longjmp 与 sigsetjmp siglongjmp"></a>setjmp longjmp 与 sigsetjmp siglongjmp</h2><p>这几个函数都用于非本地跳转，类似<code>goto</code>。<code>long</code>处的函数调用后，会从<code>set</code>处返回。</p>
+<p><code>setjmp longjmp</code>不恢复信号屏蔽字，而<code>sigsetjmp siglongjmp</code>在<code>set</code>处先保存当前信号屏蔽字，<code>long</code>回来时，恢复之前保存的屏蔽字。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;setjmp.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setjmp</span><span class="params">(jmp_buf env)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sigsetjmp</span><span class="params">(sigjmp_buf env, <span class="keyword">int</span> savesigs)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">longjmp</span><span class="params">(jmp_buf env, <span class="keyword">int</span> val)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">siglongjmp</span><span class="params">(sigjmp_buf env, <span class="keyword">int</span> val)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="sigsuspend"><a href="#sigsuspend" class="headerlink" title="sigsuspend"></a>sigsuspend</h2><p>原子操作，保存当前信号屏蔽字，设置信号屏蔽字<code>mask</code>后<code>pause</code>，在接收到信号并处理好后，恢复保存的屏蔽字再返回。它不存在临界区内收到信号的问题</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sigsuspend</span><span class="params">(<span class="keyword">const</span> <span class="keyword">sigset_t</span> *mask)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="system"><a href="#system" class="headerlink" title="system"></a>system</h2><p>执行shell命令，注意<code>system</code>的返回值<font color=red><strong>不一定</strong></font>是命令返回值，其实返回值是shell返回值，在shell异常退出时，会返回<code>128 + 信号值</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/signal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -198,7 +290,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-29 16:06:03" itemprop="dateModified" datetime="2021-08-29T16:06:03+08:00">2021-08-29</time>
+        <time title="修改时间：2021-08-29 21:03:38" itemprop="dateModified" datetime="2021-08-29T21:03:38+08:00">2021-08-29</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -325,7 +417,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-29 16:06:03" itemprop="dateModified" datetime="2021-08-29T16:06:03+08:00">2021-08-29</time>
+        <time title="修改时间：2021-08-29 21:03:38" itemprop="dateModified" datetime="2021-08-29T21:03:38+08:00">2021-08-29</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -418,7 +510,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-29 16:06:03" itemprop="dateModified" datetime="2021-08-29T16:06:03+08:00">2021-08-29</time>
+        <time title="修改时间：2021-08-29 21:03:38" itemprop="dateModified" datetime="2021-08-29T21:03:38+08:00">2021-08-29</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -511,7 +603,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-29 16:06:03" itemprop="dateModified" datetime="2021-08-29T16:06:03+08:00">2021-08-29</time>
+        <time title="修改时间：2021-08-29 21:03:38" itemprop="dateModified" datetime="2021-08-29T21:03:38+08:00">2021-08-29</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -621,7 +713,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-29 16:06:03" itemprop="dateModified" datetime="2021-08-29T16:06:03+08:00">2021-08-29</time>
+        <time title="修改时间：2021-08-29 21:03:38" itemprop="dateModified" datetime="2021-08-29T21:03:38+08:00">2021-08-29</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -705,7 +797,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-29 16:06:03" itemprop="dateModified" datetime="2021-08-29T16:06:03+08:00">2021-08-29</time>
+        <time title="修改时间：2021-08-29 21:03:38" itemprop="dateModified" datetime="2021-08-29T21:03:38+08:00">2021-08-29</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -793,7 +885,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-29 16:06:03" itemprop="dateModified" datetime="2021-08-29T16:06:03+08:00">2021-08-29</time>
+        <time title="修改时间：2021-08-29 21:03:38" itemprop="dateModified" datetime="2021-08-29T21:03:38+08:00">2021-08-29</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1003,7 +1095,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-29 16:06:03" itemprop="dateModified" datetime="2021-08-29T16:06:03+08:00">2021-08-29</time>
+        <time title="修改时间：2021-08-29 21:03:38" itemprop="dateModified" datetime="2021-08-29T21:03:38+08:00">2021-08-29</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1088,7 +1180,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-29 16:06:03" itemprop="dateModified" datetime="2021-08-29T16:06:03+08:00">2021-08-29</time>
+        <time title="修改时间：2021-08-29 21:03:38" itemprop="dateModified" datetime="2021-08-29T21:03:38+08:00">2021-08-29</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
