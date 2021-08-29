@@ -22,9 +22,9 @@ categories:
 class A {
 public:
     A(const A& _a) {} // 拷贝构造
-    A& operator=(const A& _a) // 赋值
+    A& operator=(const A& _a) {} // 赋值
     A(A&& _a) {} // 移动构造
-    A& operator=(A&& _a) // 移动赋值
+    A& operator=(A&& _a) {}// 移动赋值
 };
 
 int main() {

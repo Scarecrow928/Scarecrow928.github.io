@@ -31,3 +31,12 @@ struct pollfd {
     short revents;    /* returned events */
 };
 ```
+
+## epoll
+`select poll` 都采用轮询fd的方式确认是否有IO准备就绪，在网络中，如果fd数量非常多，则效率比较低下。
+
+epool中，每个fd对应一个回调函数，当IO就绪时，对应的fd调用回调函数，将fd加入一个链表，epoll会检查这个链表，若有fd已就绪，则在`epoll_wait`函数处返回。
+
+epoll有两种模式
+- LT模式下，fd就绪，被读取后，如果fd中还有未读完的信息，则epoll会将它放回链表，下次还会报告这个fd
+- ET模式，fd就绪，被读取后，就算有未读完的信息，epoll也不再监听这个fd，因此必须每次读完fd中的内容。这种方式效率更高。
