@@ -20,28 +20,23 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;scarecrow928.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta name="description" content="定义1234567891011121314&#x2F;&#x2F; Linux#include &lt;stdlib.h&gt;void *malloc(size_t size);void *calloc(size_t nmemb, size_t size);void *realloc(void *ptr, size_t size);void free(void *ptr);&#x2F;&#x2F; FreeBSD#include &amp;l">
-<meta property="og:type" content="article">
-<meta property="og:title" content="malloc calloc realloc">
-<meta property="og:url" content="https://scarecrow928.github.io/apue/malloc/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="👍">
+<meta property="og:url" content="https://scarecrow928.github.io/page/3/index.html">
 <meta property="og:site_name" content="👍">
-<meta property="og:description" content="定义1234567891011121314&#x2F;&#x2F; Linux#include &lt;stdlib.h&gt;void *malloc(size_t size);void *calloc(size_t nmemb, size_t size);void *realloc(void *ptr, size_t size);void free(void *ptr);&#x2F;&#x2F; FreeBSD#include &amp;l">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-06-07T22:48:38.000Z">
-<meta property="article:modified_time" content="2021-10-27T09:41:23.985Z">
 <meta property="article:author" content="Scarecrow">
-<meta property="article:tag" content="unix">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://scarecrow928.github.io/apue/malloc/">
+<link rel="canonical" href="https://scarecrow928.github.io/page/3/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;scarecrow928.github.io&#x2F;apue&#x2F;malloc&#x2F;&quot;,&quot;path&quot;:&quot;apue&#x2F;malloc&#x2F;&quot;,&quot;title&quot;:&quot;malloc calloc realloc&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:true,&quot;isPost&quot;:false,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:&quot;&quot;,&quot;permalink&quot;:&quot;&quot;,&quot;path&quot;:&quot;page&#x2F;3&#x2F;index.html&quot;,&quot;title&quot;:&quot;&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>malloc calloc realloc | 👍</title><script src="/js/config.js"></script>
+<title>👍</title><script src="/js/config.js"></script>
   
 
 
@@ -95,7 +90,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -108,7 +103,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%BA%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">函数之间的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#malloc%E4%B8%8Enew%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.2.</span> <span class="nav-text">malloc与new运算符的区别</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -163,18 +157,17 @@
 </noscript>
 
 
-    <div class="main-inner post posts-expand">
+    <div class="main-inner index posts-expand">
 
-
-  
+    
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/malloc/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://scarecrow928.github.io/apue/post1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -186,9 +179,9 @@
       <meta itemprop="name" content="👍">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          malloc calloc realloc
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/apue/post1/" class="post-title-link" itemprop="url">sysconf pathconf fpathconf</a>
+        </h2>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -198,7 +191,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2021-06-08 06:48:38" itemprop="dateCreated datePublished" datetime="2021-06-08T06:48:38+08:00">2021-06-08</time>
+      <time title="创建时间：2021-05-28 08:04:40" itemprop="dateCreated datePublished" datetime="2021-05-28T08:04:40+08:00">2021-05-28</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
@@ -227,21 +220,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Linux</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">malloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">calloc</span><span class="params">(<span class="keyword">size_t</span> nmemb, <span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">realloc</span><span class="params">(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">free</span><span class="params">(<span class="keyword">void</span> *ptr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// FreeBSD</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;malloc_np.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">malloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">calloc</span><span class="params">(<span class="keyword">size_t</span> number, <span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">realloc</span><span class="params">(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">free</span><span class="params">(<span class="keyword">void</span> *ptr)</span></span>;</span><br></pre></td></tr></table></figure>
-<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><h2 id="函数之间的区别"><a href="#函数之间的区别" class="headerlink" title="函数之间的区别"></a>函数之间的区别</h2><ol>
-<li><code>malloc</code>申请的区域值不被初始化，而<code>calloc</code>会将其初始化为<code>0</code></li>
-<li><code>malloc</code>输入为需要的字节数，<code>calloc</code>输入为对象数<code>nmemb</code>与每个对象字节数<code>size</code></li>
-<li><code>realloc</code>为已分配的地址重新分配大小，可增可减</li>
-</ol>
-<p>三个函数均通过系统调用<code>sbrk</code>实现。</p>
-<h2 id="malloc与new运算符的区别"><a href="#malloc与new运算符的区别" class="headerlink" title="malloc与new运算符的区别"></a><code>malloc</code>与<code>new</code>运算符的区别</h2><ol>
-<li><code>malloc</code>是<code>stdlib.h</code>中的库函数，而<code>new</code>是C++运算符</li>
-<li><code>malloc</code>需要指定所需字节数，<code>new</code>则由编译器推算，无需指定大小</li>
-<li><code>malloc</code>返回<code>void *</code>，后续需要自己转换类型，<code>new</code>则直接返回申请对象类型的指针</li>
-<li><code>malloc</code>申请失败时返回<code>NULL</code>，<code>new</code>则会抛出异常<code>std::bad_alloc</code></li>
-<li><code>malloc</code>直接在堆上分配内存，<code>new</code>则在自由存储区上分配。大部分编译器用堆实现自由存储区。堆是操作系统维护的内存区域，而自由存储区是C++概念</li>
-</ol>
+          <p>包含于 <code>unistd.h</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看系统配置信息，对于不同unix系统结果可能不同</span></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">sysconf</span><span class="params">(<span class="keyword">int</span> name)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">pathconf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> name)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">fpathconf</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> name)</span></span>;</span><br></pre></td></tr></table></figure>
 
+<p>使用例</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;limits.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span></span></span><br><span class="line"><span class="function"><span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> ARG_MAX</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ARG_MAX: %ld&quot;</span>, (<span class="keyword">long</span>)ARG_MAX);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ARG_MAX undefined\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _SC_ARG_MAX</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;_SC_ARG_MAX: %ld\n&quot;</span>, (<span class="keyword">long</span>)sysconf(_SC_ARG_MAX));</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;_SC_ARG_MAX undefined\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LINK_MAX</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;MAX_CANON: %ld&quot;</span>, (<span class="keyword">long</span>)LINK_MAX);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;LINK_MAX undefined\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _PC_LINK_MAX</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;_PC_LINK_MAX: %ld\n&quot;</span>, (<span class="keyword">long</span>)pathconf(<span class="string">&quot;/&quot;</span>, _PC_LINK_MAX));</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;_PC_LINK_MAX undefined\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ./a.out</span><br><span class="line">ARG_MAX undefined</span><br><span class="line">_SC_ARG_MAX: 2097152</span><br><span class="line">LINK_MAX undefined</span><br><span class="line">_PC_LINK_MAX: 65000</span><br></pre></td></tr></table></figure>
+      
     </div>
 
     
@@ -249,24 +235,8 @@
     
 
     <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/unix/" rel="tag"># unix</a>
-          </div>
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/apue/segment/" rel="prev" title="C程序中的存储空间布局">
-                  <i class="fa fa-chevron-left"></i> C程序中的存储空间布局
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/apue/fork/" rel="next" title="fork exec">
-                  fork exec <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        <div class="post-eof"></div>
+      
     </footer>
   </article>
 </div>
@@ -274,7 +244,9 @@
 
 
 
-
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 <script src="/js/comments.js"></script>
 </div>
   </main>
