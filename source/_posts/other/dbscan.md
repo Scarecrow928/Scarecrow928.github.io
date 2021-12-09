@@ -52,7 +52,7 @@ class Dbscan:
 points = np.random.rand(150, 2) * 100
 
 # 调参比较效果
-grp = Dbscan().fit(points)
+grp = Dbscan(eps=10, MinPts=5).fit(points)
 plt.scatter(points[:, 0], points[:, 1], c=grp)
 plt.show()
 
